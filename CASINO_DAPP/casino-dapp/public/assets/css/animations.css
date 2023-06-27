@@ -1,0 +1,109 @@
+/* Animations */
+
+.animation_1 {
+    -webkit-animation: animation_1 13s infinite cubic-bezier(0.47, 0, 0.745, 0.715) both;
+    animation: animation_1 13s infinite cubic-bezier(0.47, 0, 0.745, 0.715) both;
+    z-index: 10;
+}
+
+.animation_2 {
+    -webkit-animation: animation_2 13s infinite cubic-bezier(0.47, 0, 0.745, 0.715) both;
+    animation: animation_2 13s infinite cubic-bezier(0.47, 0, 0.745, 0.715) both;
+    z-index: 10;
+}
+
+.animation_3 {
+    -webkit-animation: animation_3 13s infinite cubic-bezier(0.47, 0, 0.745, 0.715) both;
+    animation: animation_3 13s infinite cubic-bezier(0.47, 0, 0.745, 0.715) both;
+    z-index: 10;
+}
+
+@keyframes animation_1 {
+    0% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-20px) translateX(20px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes animation_2 {
+    0% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-30px) translateX(-20px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes animation_3 {
+    0% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(20px) translateX(20px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 1;
+    }
+}
+
+/* Transition Functions */
+.transition-property-transform {
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform,-webkit-transform;
+}
+
+.animation-rotate {
+    -webkit-animation: spin 3s 1s infinite cubic-bezier(.075,.82,.165,1);
+    animation: spin 3s 1s infinite cubic-bezier(.075,.82,.165,1);
+}
+
+.animation-infinite {
+    webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+.animation-1times {
+    webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+
+/* Animation Keyframes */
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}

@@ -1,0 +1,86 @@
+.web3modal-modal-lightbox {
+    z-index: 99999999 !important;
+}
+
+.gradient-orange-text {
+    /*background: linear-gradient(310deg, #89bfdd  0%, #00bcff 100%);
+    background: -webkit-linear-gradient(310deg, #89bfdd 0%, #00bcff 100%);*/
+    background: #ffffff;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.button {
+    width: 100%;
+    text-align: center;
+    padding: 10px 25px;
+    color: #000000;
+    font-weight: 800;
+    background-image: linear-gradient(310deg, #FFD700 0%, #FFD700 100%);
+    border-radius: 10px;
+    border: 1px solid #ffffff0f;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.1s ease-in;
+    -webkit-transition: all 0.1s ease-in;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button:hover {
+
+}
+
+a {
+    cursor: pointer !important;
+}
+
+/* Toast */
+
+.toast-notification {
+    
+}
+
+.toast-notification span {
+    background: #FFD700 !important;
+    color: rgb(52, 71, 103) !important;
+    margin-top: 10px;
+    border-radius: 10px !important;
+    overflow: hidden;
+    font-weight: 800 !important;
+    padding: 20px !important;
+}
+
+/* Mui and antd overrides */
+
+.MuiStepLabel-root:not(.Mui-disabled) span, .MuiStepLabel-root:not(.Mui-disabled) p {
+    font-weight: 800 !important;
+    color: rgba(0,0,0,.3) !important;
+}
+
+.MuiStepLabel-root:not(.Mui-disabled) svg {
+    color: #F42D29 !important;
+}
+
+.MuiStepLabel-root.Mui-disabled svg {
+    color: #F42D29 !important;
+    opacity: .5 !important;
+}
+
+.ant-modal {
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
+
+.ant-modal-mask {
+    background: rgba(0, 0, 0, 0.85) !important;
+    z-index: 99999 !important;
+}
+
+.ant-modal-wrap {
+    z-index: 9999999 !important;
+}
+
+.ant-modal-content {
+    padding: 0 !important;
+}

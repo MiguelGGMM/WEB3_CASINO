@@ -1,0 +1,23 @@
+{
+  "name": "web3-casino-solidity",
+  "version": "1.0.0",
+  "description": "WEB3 descentralized casino",
+  "author": "MiguelGGMM",
+  "license": "MIT",
+  "scripts": {
+    "compile": "truffle compile",
+    "ganache": "ganache",
+    "ganacheFork": "ganache --fork=https://arbitrum-mainnet.infura.io/v3/8c398630bae943e6bcc06e1d6393a5f3",
+    "test": "truffle test --network ganacheLocal",
+    "deploy": "truffle migrate --network arbitrumOneMainnet",
+    "verify": "truffle run verify CasinoTreasury Roulette BetsManager SpinsManager ProfitsManager --network arbitrumOneMainnet"
+  },
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.1.6",
+    "dotenv": "^16.1.4",
+    "ganache": "^7.7.4",
+    "lodash": "^4.17.21",
+    "truffle-contract-size": "^2.0.1",
+    "truffle-plugin-verify": "^0.6.3"
+  }
+}
