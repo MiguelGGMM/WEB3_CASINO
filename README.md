@@ -1,27 +1,30 @@
-<p align="center"><img src="public/assets/img/sidebar-icon.png" align="center" width="250"></p>
+<p align="center"><img src="CASINO_DAPP/casino-dapp/public/assets/img/sidebar-icon.png" align="center" width="250"></p>
 <h2 align="center">Next.js Web3 casino</h2>
 
 <!-- <p align="center"><b>🎰 Next.js + Material UI + React +  + web3 casino⚡</b></p> -->
-[![NODE]https://img.shields.io/badge/Nodejs-18.12.1_(LTS)-blue](https://nodejs.org/en/blog/release/v18.12.1)
-[![NPM]https://img.shields.io/badge/npm-8.19.2-blue](https://www.npmjs.com/package/npm/v/8.19.2)
-[![NEXT]https://img.shields.io/badge/NEXT-v13.4.5-blue](https://www.npmjs.com/package/next/v/13.4.5)
-[![LICENSE]https://img.shields.io/badge/LICENSE-MIT-blue](https://github.com/MiguelGGMM/WEB3_CASINO/blob/master/LICENSE)
-[![CHAINLINKDF]]https://img.shields.io/badge/CHAINLINK-DATAFEEDS-green(https://data.chain.link/)
-[![CHAINLINKVRF]]https://img.shields.io/badge/CHAINLINK-VRF-green(https://docs.chain.link/vrf/v2/introduction)
+[![NODE](https://img.shields.io/badge/NODE-18.12.1_(LTS)-blue)](https://nodejs.org/en/blog/release/v18.12.1)
+[![NPM](https://img.shields.io/badge/NPM-8.19.2-blue)](https://www.npmjs.com/package/npm/v/8.19.2)
+[![NEXT](https://img.shields.io/badge/NEXT-v13.4.5-blue)](https://www.npmjs.com/package/next/v/13.4.5)
+[![LICENSE](https://img.shields.io/badge/LICENSE-MIT-blue)](https://github.com/MiguelGGMM/WEB3_CASINO/blob/master/LICENSE)
+[![CHAINLINKDF](https://img.shields.io/badge/CHAINLINK-DATAFEEDS-green)](https://data.chain.link/)
+[![CHAINLINKVRF](https://img.shields.io/badge/CHAINLINK-VRF-green)](https://docs.chain.link/vrf/v2/introduction)
 
-<p>This is a web3 casino Ethereum dapp using mainly Next.js and material UI.<p>
-<p>In addition to: bootstrap, tailwind, scss, typescript and typechain in order to generate types for contract calls.</p>
-<p>About typechain: it's a common problem that ethers and web3 libraries generate dinamically functions from json abi, so you can not use typescript with these libraries, typechain generates automatically types files from compiler .json output build files solving this problem.</p>
-<p>Contracts testing against mainnet and test are also included using truffle and ganache</p>
+## About
 
-### Webcome to the descentralized WEB3 CASINO!
+<p>This is a web3 casino dapp using mainly <a href=https://www.npmjs.com/package/next target="_blank">Next.js</a> and <a href=https://mui.com/material-ui/getting-started/overview/ target="_blank">material UI</a>, in addition to: <a href=https://www.npmjs.com/package/react target="_blank">react</a>, <a href=https://getbootstrap.com/ target="_blank">bootstrap</a>, <a href=https://tailwindcss.com/ target="_blank">tailwind</a>, <a href=https://sass-lang.com/guide/ target="_blank">scss</a>, <a href=https://www.typescriptlang.org/ target="_blank">typescript</a> and <a href=https://www.npmjs.com/package/typechain target="_blank">typechain</a> in order to generate types for contract calls.</p>
+<p>About typechain: it's a common problem that <a href=https://www.npmjs.com/package/ethers target="_blank">ethers</a> and <a href=https://www.npmjs.com/package/web3 target="_blank">web3</a> libraries generate dinamically functions from json abi, so you can not use typescript with these libraries (unless you generate the types manually), typechain generates automatically the *.ts files using the SOLIDITY compiler *.json build files (compiler output) solving the problem.</p>
+<p>Contracts testing against mainnet and test are also included using <a href=https://www.npmjs.com/package/truffle target="_blank">truffle</a> and <a href=https://www.npmjs.com/package/ganache target="_blank">ganache</a></p>
+
+  
+## Webcome to the descentralized WEB3 CASINO!
 
 <p>The objective of this project is PURELY DIDACTIC<p>
-<p>Exemplify how blockchain technology can be used to build a totally transparent open source web3 casino, rid of owner priviledges, using trustfully third party services like chainlink for randomizing bets and get price of tokens. Using smart contracts designed and deployed on arbitrum blockchain and leading edge technologies like react, next, bootstrap, tailwind and open source web3 libraries that allows user authenticate himself, retrive contract data and sign transactions in order to perform bets.</p>
+<p>Exemplify how blockchain technology can be used to build a totally transparent open source web3 casino, rid of owner priviledges, using trusted third party services like <a href=https://data.chain.link/ target="_blank">chainlink</a> in order to ensure fair bet solving, smart contracts designed and deployed on <a href=https://arbiscan.io/ target="_blank">arbitrum</a> blockchain and leading edge technologies like react, next, bootstrap, tailwind and open source <a href=https://github.com/Uniswap/web3-react/tree/main target="_blank">web3 libraries</a> that allows user authenticate himself, retrive contract data and sign transactions in order to perform bets.</p>
 
 ### Preview
 
 https://res.cloudinary.com/dxouzehk9/video/upload/v1687902978/web3_casino/won-roulette_xkkdu8.mp4
+
 
 https://res.cloudinary.com/dxouzehk9/video/upload/v1687902977/web3_casino/lost-roulette_kvuywe.mp4
 
