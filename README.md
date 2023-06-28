@@ -28,7 +28,7 @@
 
 <a href=https://res.cloudinary.com/dxouzehk9/video/upload/v1687902977/web3_casino/lost-roulette_kvuywe.mp4 target="_blank"><picture><img target="_blank" src="https://github.com/MiguelGGMM/WEB3_CASINO/assets/104460442/23a14359-d5c1-480e-97d6-59743251caf9" /></picture></a>
 
-### How works?
+## How works?
 
 -SOLIDITY directory enables you to test and deploy the web3 casino smart contracts, there is mainly 2 contracts, one is used for casino treasury where users deposit eth for bets and 
 eth collected is stored, this contract exists for scalability and security reasons, will allows you to add new contracts that could be developed in near future and independently of how much contracts/games your casino have users will have to deposit their eth using always the same contract.  
@@ -40,7 +40,7 @@ eth collected is stored, this contract exists for scalability and security reaso
 -This project should work on any EVM based chain but contract addresses and chain settings has to be set on .env and .env.local files.  
 
 
-### Quick start
+## Quick start
 
 The first thing you need to do is clone repo.
 
@@ -77,7 +77,7 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 
-#### Project Structure SOLIDITY
+## Project Structure SOLIDITY
 
 ```
 📦SOLIDITY                   // Solidity part of the project you will need for smart contract deployment and testing
@@ -105,7 +105,7 @@ npm run dev
  ┗ 📜truffle-config.js       // truffle config file where you can edit chain settings for test and deployment
 ```
 
-#### Project Structure CASINO_DAPP
+## Project Structure CASINO_DAPP
 
 ```
 📦CASINO_DAPP\casino-dapp    // DAPP part of the project
