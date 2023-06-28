@@ -20,6 +20,8 @@ export default class MyDocument extends Document {
                     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossOrigin="anonymous"></script>
                     <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
                     <link href="/assets/css/global.css" rel="stylesheet" />
+                    <link href="/assets/css/tailwind.css" rel="stylesheet" />
+                    <link href="/assets/css/tailwind-output.css" rel="stylesheet" />
                     <link href="/assets/css/global-responsive.css" rel="stylesheet" />
                     <link href="/assets/css/animations.css" rel="stylesheet" />
 

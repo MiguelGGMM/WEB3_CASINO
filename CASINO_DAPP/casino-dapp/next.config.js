@@ -12,10 +12,11 @@ const nextConfig = {
         styledComponents: true,
     },
     eslint: {
-        dirs: ['src']
-    },
+        //dirs: ['src']
+        dirs: ["./app", "./src/pages", "./src"]
+    }
     //pageExtensions: process.env["CC_SITE_ID"] ? ["static.tsx"] : ["server.tsx"]
-    pageExtensions: ['page.js', 'page.tsx', 'page.jsx', 'page.ts', 'static.tsx', 'server.tsx']
+    //pageExtensions: ['page.js', 'page.tsx', 'page.jsx', 'page.ts', 'static.tsx', 'server.tsx']
 }
 
 module.exports = nextConfig//withSentryConfig(nextConfig)
