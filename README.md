@@ -21,15 +21,13 @@
 <p>The objective of this project is PURELY DIDACTIC<p>
 <p>Exemplify how blockchain technology can be used to build a totally transparent open source web3 casino, rid of owner priviledges, using trusted third party services like <a href=https://data.chain.link/ target="_blank">chainlink</a> in order to ensure fair bet solving, smart contracts designed and deployed on <a href=https://arbiscan.io/ target="_blank">arbitrum</a> blockchain and leading edge technologies like react, next, bootstrap, tailwind and open source <a href=https://github.com/Uniswap/web3-react/tree/main target="_blank">web3 libraries</a> that allows user authenticate himself, retrive contract data and sign transactions in order to perform bets.</p>
 
-### Preview
+## Previews and videos
 
-https://res.cloudinary.com/dxouzehk9/video/upload/v1687902978/web3_casino/won-roulette_xkkdu8.mp4
+<a href=https://res.cloudinary.com/dxouzehk9/video/upload/v1687902978/web3_casino/won-roulette_xkkdu8.mp4 target="_blank"><picture><img src="https://github.com/MiguelGGMM/WEB3_CASINO/assets/104460442/fa513197-5ae2-495a-a050-e8cb7e3de5a8" /></picture></a>
 
+<a href=https://res.cloudinary.com/dxouzehk9/video/upload/v1687902977/web3_casino/lost-roulette_kvuywe.mp4 target="_blank"><picture><img src="https://github.com/MiguelGGMM/WEB3_CASINO/assets/104460442/23a14359-d5c1-480e-97d6-59743251caf9" /></picture></a>
 
-https://res.cloudinary.com/dxouzehk9/video/upload/v1687902977/web3_casino/lost-roulette_kvuywe.mp4
-
-
-### How it works?
+### How works?
 
 -SOLIDITY directory enables you to test and deploy web3 casino smart contracts, there is mainly 2 contracts, one is used for casino treasury where users eth for bets and 
 eth collected are stored, this contract exists for scalability and security reasons, it allows you to add new contracts you could develop in near future and independently of how much contracts/games your casino have users will have to deposit using always the same contract.
