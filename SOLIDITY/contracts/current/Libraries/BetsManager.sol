@@ -86,6 +86,7 @@ contract BetsManager {
 
     struct bet {
         uint256 index;
+        uint256 timestamp;
         address user;
         uint256 betAmount;                    // amount in dollars
         uint8 _type;                          // betType
@@ -144,6 +145,7 @@ contract BetsManager {
 
         bets[nextBet] = bet(
             nextBet,
+            block.timestamp,
             adr,
             betAmount,
             uint8(betType.paid),
@@ -207,6 +209,7 @@ contract BetsManager {
     // Cancels the bet and returns the money to be returned to the address, only can be called for owner or user (transferences managed on main contract)
     function _cancelBet(uint256 betIndex) public onlyRoulette returns(uint256) {      
         require(bets[betIndex].state == uint8(betState.pending), "Bet is not pending");
+        require(bets[betIndex].timestamp.add(300) < block.timestamp, "Bets only can be cancelled after 5 minutes");
         bets[betIndex].state = uint8(betState.cancelled);
         _removeUserPendingBet(betIndex);
         return bets[betIndex].betAmount;
