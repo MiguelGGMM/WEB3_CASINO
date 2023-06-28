@@ -13,7 +13,8 @@ const nextConfig = {
     },
     eslint: {
         dirs: ['src']
-    }
+    },
+    pageExtensions: process.env["CC_SITE_ID"] ? ["static.tsx"] : ["server.tsx"]
 }
 
 module.exports = nextConfig//withSentryConfig(nextConfig)
