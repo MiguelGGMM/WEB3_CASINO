@@ -22,6 +22,11 @@
 <p>The objective of this project is PURELY DIDACTIC<p>
 <p>Exemplify how blockchain technology can be used to build a totally transparent open source web3 casino, rid of owner priviledges, using trusted third party services like <a href=https://data.chain.link/ target="_blank">chainlink</a> in order to ensure fair bet solving, smart contracts designed and deployed on <a href=https://arbiscan.io/ target="_blank">arbitrum</a> blockchain and leading edge technologies like react, next, bootstrap, tailwind and open source <a href=https://github.com/Uniswap/web3-react/tree/main target="_blank">web3 libraries</a> that allows user authenticate himself, retrive contract data and sign transactions in order to perform bets.</p>
 
+## Vercel deployment
+
+<a href=https://vercel.com/workflow>Vercel</a> enables built-in CI/CD for your frontend project
+<img>https://web3-casino.vercel.app/</img>
+
 ## Previews and videos
 
 <a href=https://res.cloudinary.com/dxouzehk9/video/upload/v1687902978/web3_casino/won-roulette_xkkdu8.mp4 target="_blank"><picture><img target="_blank" src="https://github.com/MiguelGGMM/WEB3_CASINO/assets/104460442/fa513197-5ae2-495a-a050-e8cb7e3de5a8" /></picture></a>
