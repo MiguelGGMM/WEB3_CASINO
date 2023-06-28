@@ -8,6 +8,7 @@
 [![LICENSE](https://img.shields.io/badge/LICENSE-MIT-blue)](https://github.com/MiguelGGMM/WEB3_CASINO/blob/master/LICENSE)
 [![CHAINLINKDF](https://img.shields.io/badge/CHAINLINK-DATAFEEDS-green)](https://data.chain.link/)
 [![CHAINLINKVRF](https://img.shields.io/badge/CHAINLINK-VRF-green)](https://docs.chain.link/vrf/v2/introduction)
+[![UNISWAPV3](https://img.shields.io/badge/UNISWAP-V3-green)](https://docs.uniswap.org/contracts/v3/overview)
 
 ## About
 
@@ -23,26 +24,25 @@
 
 ## Previews and videos
 
-<a href=https://res.cloudinary.com/dxouzehk9/video/upload/v1687902978/web3_casino/won-roulette_xkkdu8.mp4 target="_blank"><picture><img src="https://github.com/MiguelGGMM/WEB3_CASINO/assets/104460442/fa513197-5ae2-495a-a050-e8cb7e3de5a8" /></picture></a>
+<a href=https://res.cloudinary.com/dxouzehk9/video/upload/v1687902978/web3_casino/won-roulette_xkkdu8.mp4 target="_blank"><picture><img target="_blank" src="https://github.com/MiguelGGMM/WEB3_CASINO/assets/104460442/fa513197-5ae2-495a-a050-e8cb7e3de5a8" /></picture></a>
 
-<a href=https://res.cloudinary.com/dxouzehk9/video/upload/v1687902977/web3_casino/lost-roulette_kvuywe.mp4 target="_blank"><picture><img src="https://github.com/MiguelGGMM/WEB3_CASINO/assets/104460442/23a14359-d5c1-480e-97d6-59743251caf9" /></picture></a>
+<a href=https://res.cloudinary.com/dxouzehk9/video/upload/v1687902977/web3_casino/lost-roulette_kvuywe.mp4 target="_blank"><picture><img target="_blank" src="https://github.com/MiguelGGMM/WEB3_CASINO/assets/104460442/23a14359-d5c1-480e-97d6-59743251caf9" /></picture></a>
 
 ### How works?
 
--SOLIDITY directory enables you to test and deploy web3 casino smart contracts, there is mainly 2 contracts, one is used for casino treasury where users eth for bets and 
-eth collected are stored, this contract exists for scalability and security reasons, it allows you to add new contracts you could develop in near future and independently of how much contracts/games your casino have users will have to deposit using always the same contract.
--There is some fee applied on users bet (5%) that will be used to buy LINK against uniswapV3 liquidity pool and fund chainlink subscription automatically for random number 
-generation.
--If bet solving takes too much users also can cancel their bet and get their funds back.
--There is a manual bet solving in case chainlink takes too much but ideally owners should renounce contract and use chainlink.
--Bets amounts are in $ and price is calculated using a chainlink datafeed.
--CASINO_DAPP directory is the next DAPP used to connect with the descentralized casino smart contracts.
--This project should work on any EVM based chain but contract addresses and chain settings has to be set on .env and .env.local files.
+-SOLIDITY directory enables you to test and deploy the web3 casino smart contracts, there is mainly 2 contracts, one is used for casino treasury where users deposit eth for bets and 
+eth collected is stored, this contract exists for scalability and security reasons, will allows you to add new contracts that could be developed in near future and independently of how much contracts/games your casino have users will have to deposit their eth using always the same contract.  
+-There is some fee applied on users bet (5%) that will be used to buy LINK against uniswapV3 liquidity pool and fund chainlink subscription automatically for VRF (Verifiable Randomness Function -> bet solving).  
+-If bet solving takes too much users also can cancel their bet and get their funds back.  
+-There is a manual bet solving in case chainlink takes too much but ideally owners should renounce contract and use chainlink VRF.  
+-Bets amounts are in $ and price is calculated using a chainlink datafeed.  
+-CASINO_DAPP directory is the next DAPP used as UI to interact with the roulette, show data and sign transactions against the smart contracts.  
+-This project should work on any EVM based chain but contract addresses and chain settings has to be set on .env and .env.local files.  
 
 
 ### Quick start
 
-The first things you need to do is clone repo.
+The first thing you need to do is clone repo.
 
 Before compile and deploy contracts you have to set some .env addresses following the .env.sample these address can vary depending on the chain you want to deploy, if you want deploy in arbitrum mainnet use the default values
 
