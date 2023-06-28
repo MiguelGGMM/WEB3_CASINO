@@ -3,7 +3,7 @@
 const nextConfig = {
     // future: {
     //     webpack5: true
-    // }  
+    // }      
     reactStrictMode: false,
     distDir: 'build',
     // swcMinify: true,  
