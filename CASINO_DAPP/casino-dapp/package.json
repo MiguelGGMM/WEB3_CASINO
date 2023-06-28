@@ -5,8 +5,9 @@
   "scripts": {
     "contracts": "npx typechain --target ethers-v5 --out-dir src/abis '../../SOLIDITY/build/contracts/*.json'",
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start",
+    "export": "npm run build && next export -o out",
     "lint": "next lint"
   },
   "dependencies": {
