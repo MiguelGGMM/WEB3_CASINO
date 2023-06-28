@@ -1,47 +1,48 @@
-<p align="center"><img src="public/assets/img/sidebar-icon.png" align="center" width="250"></p>
+<p align="center"><img src="CASINO_DAPP/casino-dapp/public/assets/img/sidebar-icon.png" align="center" width="250"></p>
 <h2 align="center">Next.js Web3 casino</h2>
 
 <!-- <p align="center"><b>🎰 Next.js + Material UI + React +  + web3 casino⚡</b></p> -->
-[![NODE]https://img.shields.io/badge/Nodejs-18.12.1_(LTS)-blue](https://nodejs.org/en/blog/release/v18.12.1)
-[![NPM]https://img.shields.io/badge/npm-8.19.2-blue](https://www.npmjs.com/package/npm/v/8.19.2)
-[![NEXT]https://img.shields.io/badge/NEXT-v13.4.5-blue](https://www.npmjs.com/package/next/v/13.4.5)
-[![LICENSE]https://img.shields.io/badge/LICENSE-MIT-blue](https://github.com/MiguelGGMM/WEB3_CASINO/blob/master/LICENSE)
-[![CHAINLINKDF]]https://img.shields.io/badge/CHAINLINK-DATAFEEDS-green(https://data.chain.link/)
-[![CHAINLINKVRF]]https://img.shields.io/badge/CHAINLINK-VRF-green(https://docs.chain.link/vrf/v2/introduction)
+[![NODE](https://img.shields.io/badge/NODE-18.12.1_(LTS)-blue)](https://nodejs.org/en/blog/release/v18.12.1)
+[![NPM](https://img.shields.io/badge/NPM-8.19.2-blue)](https://www.npmjs.com/package/npm/v/8.19.2)
+[![NEXT](https://img.shields.io/badge/NEXT-v13.4.5-blue)](https://www.npmjs.com/package/next/v/13.4.5)
+[![LICENSE](https://img.shields.io/badge/LICENSE-MIT-blue)](https://github.com/MiguelGGMM/WEB3_CASINO/blob/master/LICENSE)
+[![CHAINLINKDF](https://img.shields.io/badge/CHAINLINK-DATAFEEDS-green)](https://data.chain.link/)
+[![CHAINLINKVRF](https://img.shields.io/badge/CHAINLINK-VRF-green)](https://docs.chain.link/vrf/v2/introduction)
+[![UNISWAPV3](https://img.shields.io/badge/UNISWAP-V3-green)](https://docs.uniswap.org/contracts/v3/overview)
 
-<p>This is a web3 casino Ethereum dapp using mainly Next.js and material UI.<p>
-<p>In addition to: bootstrap, tailwind, scss, typescript and typechain in order to generate types for contract calls.</p>
-<p>About typechain: it's a common problem that ethers and web3 libraries generate dinamically functions from json abi, so you can not use typescript with these libraries, typechain generates automatically types files from compiler .json output build files solving this problem.</p>
-<p>Contracts testing against mainnet and test are also included using truffle and ganache</p>
+## About
 
-### Webcome to the descentralized WEB3 CASINO!
+<p>This is a web3 casino dapp using mainly <a href=https://www.npmjs.com/package/next target="_blank">Next.js</a> and <a href=https://mui.com/material-ui/getting-started/overview/ target="_blank">material UI</a>, in addition to: <a href=https://www.npmjs.com/package/react target="_blank">react</a>, <a href=https://getbootstrap.com/ target="_blank">bootstrap</a>, <a href=https://tailwindcss.com/ target="_blank">tailwind</a>, <a href=https://sass-lang.com/guide/ target="_blank">scss</a>, <a href=https://www.typescriptlang.org/ target="_blank">typescript</a> and <a href=https://www.npmjs.com/package/typechain target="_blank">typechain</a> in order to generate types for contract calls.</p>
+<p>About typechain: it's a common problem that <a href=https://www.npmjs.com/package/ethers target="_blank">ethers</a> and <a href=https://www.npmjs.com/package/web3 target="_blank">web3</a> libraries generate dinamically functions from json abi, so you can not use typescript with these libraries (unless you generate the types manually), typechain generates automatically the *.ts files using the SOLIDITY compiler *.json build files (compiler output) solving the problem.</p>
+<p>Contracts testing against mainnet and test are also included using <a href=https://www.npmjs.com/package/truffle target="_blank">truffle</a> and <a href=https://www.npmjs.com/package/ganache target="_blank">ganache</a></p>
+
+  
+## Webcome to the descentralized WEB3 CASINO!
 
 <p>The objective of this project is PURELY DIDACTIC<p>
-<p>Exemplify how blockchain technology can be used to build a totally transparent open source web3 casino, rid of owner priviledges, using trustfully third party services like chainlink for randomizing bets and get price of tokens. Using smart contracts designed and deployed on arbitrum blockchain and leading edge technologies like react, next, bootstrap, tailwind and open source web3 libraries that allows user authenticate himself, retrive contract data and sign transactions in order to perform bets.</p>
+<p>Exemplify how blockchain technology can be used to build a totally transparent open source web3 casino, rid of owner priviledges, using trusted third party services like <a href=https://data.chain.link/ target="_blank">chainlink</a> in order to ensure fair bet solving, smart contracts designed and deployed on <a href=https://arbiscan.io/ target="_blank">arbitrum</a> blockchain and leading edge technologies like react, next, bootstrap, tailwind and open source <a href=https://github.com/Uniswap/web3-react/tree/main target="_blank">web3 libraries</a> that allows user authenticate himself, retrive contract data and sign transactions in order to perform bets.</p>
 
-### Preview
+## Previews and videos
 
-https://res.cloudinary.com/dxouzehk9/video/upload/v1687902978/web3_casino/won-roulette_xkkdu8.mp4
+<a href=https://res.cloudinary.com/dxouzehk9/video/upload/v1687902978/web3_casino/won-roulette_xkkdu8.mp4 target="_blank"><picture><img target="_blank" src="https://github.com/MiguelGGMM/WEB3_CASINO/assets/104460442/fa513197-5ae2-495a-a050-e8cb7e3de5a8" /></picture></a>
 
-https://res.cloudinary.com/dxouzehk9/video/upload/v1687902977/web3_casino/lost-roulette_kvuywe.mp4
+<a href=https://res.cloudinary.com/dxouzehk9/video/upload/v1687902977/web3_casino/lost-roulette_kvuywe.mp4 target="_blank"><picture><img target="_blank" src="https://github.com/MiguelGGMM/WEB3_CASINO/assets/104460442/23a14359-d5c1-480e-97d6-59743251caf9" /></picture></a>
 
+## How works?
 
-### How it works?
-
--SOLIDITY directory enables you to test and deploy web3 casino smart contracts, there is mainly 2 contracts, one is used for casino treasury where users eth for bets and 
-eth collected are stored, this contract exists for scalability and security reasons, it allows you to add new contracts you could develop in near future and independently of how much contracts/games your casino have users will have to deposit using always the same contract.
--There is some fee applied on users bet (5%) that will be used to buy LINK against uniswapV3 liquidity pool and fund chainlink subscription automatically for random number 
-generation.
--If bet solving takes too much users also can cancel their bet and get their funds back.
--There is a manual bet solving in case chainlink takes too much but ideally owners should renounce contract and use chainlink.
--Bets amounts are in $ and price is calculated using a chainlink datafeed.
--CASINO_DAPP directory is the next DAPP used to connect with the descentralized casino smart contracts.
--This project should work on any EVM based chain but contract addresses and chain settings has to be set on .env and .env.local files.
+-SOLIDITY directory enables you to test and deploy the web3 casino smart contracts, there is mainly 2 contracts, one is used for casino treasury where users deposit eth for bets and 
+eth collected is stored, this contract exists for scalability and security reasons, will allows you to add new contracts that could be developed in near future and independently of how much contracts/games your casino have users will have to deposit their eth using always the same contract.  
+-There is some fee applied on users bet (5%) that will be used to buy LINK against uniswapV3 liquidity pool and fund chainlink subscription automatically for VRF (Verifiable Randomness Function -> bet solving).  
+-If bet solving takes too much users also can cancel their bet and get their funds back.  
+-There is a manual bet solving in case chainlink takes too much but ideally owners should renounce contract and use chainlink VRF.  
+-Bets amounts are in $ and price is calculated using a chainlink datafeed.  
+-CASINO_DAPP directory is the next DAPP used as UI to interact with the roulette, show data and sign transactions against the smart contracts.  
+-This project should work on any EVM based chain but contract addresses and chain settings has to be set on .env and .env.local files.  
 
 
-### Quick start
+## Quick start
 
-The first things you need to do is clone repo.
+The first thing you need to do is clone repo.
 
 Before compile and deploy contracts you have to set some .env addresses following the .env.sample these address can vary depending on the chain you want to deploy, if you want deploy in arbitrum mainnet use the default values
 
@@ -76,7 +77,7 @@ npm install --legacy-peer-deps
 npm run dev
 ```
 
-#### Project Structure SOLIDITY
+## Project Structure SOLIDITY
 
 ```
 📦SOLIDITY                   // Solidity part of the project you will need for smart contract deployment and testing
@@ -104,7 +105,7 @@ npm run dev
  ┗ 📜truffle-config.js       // truffle config file where you can edit chain settings for test and deployment
 ```
 
-#### Project Structure CASINO_DAPP
+## Project Structure CASINO_DAPP
 
 ```
 📦CASINO_DAPP\casino-dapp    // DAPP part of the project
