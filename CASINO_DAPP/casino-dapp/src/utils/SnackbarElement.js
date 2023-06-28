@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default SnackbarElement = (props) => {
+export default function SnackbarElement(props) {
     const {
         onClose
     } = props;
