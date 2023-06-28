@@ -27,6 +27,7 @@
     "@web3-react/network-connector": "^6.2.9",
     "@web3-react/walletconnect-connector": "^6.2.13",
     "autoprefixer": "10.4.14",
+    "awesome-typescript-loader": "^5.2.1",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
     "ethers": "5.7",
