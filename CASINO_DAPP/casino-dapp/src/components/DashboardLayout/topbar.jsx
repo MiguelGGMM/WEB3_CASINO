@@ -1,6 +1,6 @@
 import React from "react";
 import ConnectWallet from "../ConnectWallet/ConnectWallet";
-import '../../../public/assets/css/tailwind.css';
+//import '../../../public/assets/css/tailwind.css';
 
 const DashboardTopBar = ({ title }) => {
     //const classes = useStyles();

@@ -1,3 +1,9 @@
+@config "../../../tailwind.config.js";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .web3modal-modal-lightbox {
     z-index: 99999999 !important;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { notify } from 'react-notify-toast';
-import '../../../public/assets/css/tailwind.css';
+//import '../../../public/assets/css/tailwind.css';
 
 const DashboardHome = ({}) => {
     const router = useRouter();
