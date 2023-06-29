@@ -1,4 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
+import Image from "next/image";
 //import Rodal from 'rodal'; //replaced by dialogBetResult
 import ResponsiveDialog from './dialogBetResult';
 import Confetti from "./confeti";
@@ -25,7 +26,10 @@ const OperationsBox = dynamic(() => import("./operationsBox"), {
     ssr: false
 });
 
-const loadingGif = "assets/img/spin/loading.gif";
+//Images
+import loadingGif from "@assets/img/spin/loading.gif";
+import walletIcon from "@assets/img/icons/wallet.png";
+import depositIcon from "@assets/img/icons/deposit.png"
 //const refreshButton = "assets/img/spin/redo.png";
 
 const DEFAULT_DATA_BALANCES = {
@@ -107,7 +111,7 @@ const WheelLayout = (props: any) => {
              <div style={{maxHeight:"120 !important"}}> 
                 <h1 style={{fontSize: '3em', alignItems: 'center', justifyContent: 'center', display: 'flex'}}>
                     { titleMesage }
-                    <img src={icon} style={{ maxHeight: 50, marginLeft: 10 }} />
+                    <Image src={icon} style={{ maxHeight: 50, marginLeft: 10 }} alt="prizeIcon" />
                 </h1>
                 <p style={{alignItems: 'center', justifyContent: 'center', display: 'flex', marginLeft: '3px', marginRight: "3px"}}>You { 
                 `${ prefixBody }` 
@@ -289,12 +293,7 @@ const WheelLayout = (props: any) => {
     React.useEffect(() => {
         setFireConfettiTrigger(false);
         forceReload();        
-    },[provider]);
-
-    React.useEffect(() => {
-        setFireConfettiTrigger(false);
-        forceReload();        
-    },[account]);
+    },[provider, account]);
 
     return (
         <div id="wheel-container" className="container-fluid py-4">
@@ -319,11 +318,11 @@ const WheelLayout = (props: any) => {
                         <div className="card-body p-3 -tw-mt-7 tw-flex">
                             <div className="tw-flex tw-justify-center tw-flex-col">
                             <h6 className="font-weight-bolder tw-flex tw-text-base tw-text-[#ffffff]">
-                                <img className="tw-h-5 tw-w-5 tw-mr-2 tw-align-text-top" src="../assets/img/icons/wallet.png"/>
+                                <Image className="tw-h-5 tw-w-5 tw-mr-2 tw-align-text-top" src={walletIcon} alt="wallet-icon"/>
                                 <span className="tw-text-[#f7db2d] tw-pr-1">Wallet:</span> {` ${ dataBalances.USER_TOKENS } $ETH (${ dataBalances.USER_TOKENS_VALUE }$)`}
                             </h6>
                             <h6 className="font-weight-bolder tw-flex tw-text-base tw-text-[#ffffff]">
-                                <img className="tw-h-5 tw-w-5 tw-mr-2 tw-align-text-top" src="../assets/img/icons/deposit.png"/>
+                                <Image className="tw-h-5 tw-w-5 tw-mr-2 tw-align-text-top" src={depositIcon} alt="deposit-icon"/>
                                 <span className="tw-text-[#f7db2d] tw-pr-1">Deposit:</span> {` ${ dataBalances.USER_TOKENS_IWALLET } $ETH (${ dataBalances.USER_TOKENS_VALUE_IWALLET }$)`}
                             </h6>
                             </div>                                                       
@@ -345,7 +344,7 @@ const WheelLayout = (props: any) => {
 
                                     <div id="rowRoulettes" className="row">
                                         <div id="loadGifRoulettes" className="col tw-overflow-visible tw-flex-col tw-justify-center tw-items-center tw-mb-7" style={{ display: 'flex' }}>
-                                            <img src={loadingGif} />
+                                            <Image src={loadingGif} alt="loadingGif"/>
                                             <div className="tw-h-9"></div>
                                         </div>
 

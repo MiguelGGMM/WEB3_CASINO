@@ -94,7 +94,7 @@ const Confetti = ({fireConfettiTrigger}: any) => {
         if(fireConfettiTrigger) {
             fireConfetti();
         }
-    },[fireConfettiTrigger]);
+    });
 
     return (
         <>

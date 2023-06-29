@@ -1,6 +1,7 @@
 import React from "react";
+import Image from "next/image";
 import ConnectWallet from "../ConnectWallet/ConnectWallet";
-//import '../../../public/assets/css/tailwind.css';
+import casinoIcon from "@assets/img/casino_icon_with_black_background_3.png";
 
 const DashboardTopBar = ({ title }) => {
     //const classes = useStyles();
@@ -12,11 +13,7 @@ const DashboardTopBar = ({ title }) => {
             <div className="topbar container-fluid py-1 px-0">
                 <nav aria-label="breadcrumb">
                     <div className="tw-flex tw-flex-row tw-justify-center tw-items-center tw-gap-2">
-                        <img
-                            className="w-100 tw-max-h-[40px] tw-max-w-[30px]"
-                            src="../assets/img/casino_icon_with_black_background_3.png"
-                            alt="logo"
-                        />
+                        <Image className="w-100 tw-max-h-[40px] tw-max-w-[30px]" src={casinoIcon} alt="logo"/>
                         <div className="font-weight-bolder mb-0 gradient-orange-text tw-max-w-[80%]"><span>{ title }</span></div>
                     </div>
                 </nav>

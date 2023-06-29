@@ -57,31 +57,6 @@ const ConnectWallet = () => {
         }
     }
 
-    useEffect(() => {
-        setTimeout(() => {
-            onConnect(false);
-        }, 1200);
-    }, []);
-
-    useEffect(() => {
-        if (provider && account && active && connected) {            
-            CommonService.setProvider(provider);
-            CommonService.setSigner(signer);
-            CommonService.checkNetwork(chainId).then((isValid) => {
-                if (isValid) {         
-                }else{                    
-                    trySwitchChain(provider);
-                }
-            }).catch((err) => {
-                if (err && err.message && err.code == 4001) { 
-                    
-                }   
-                notify.show(err.message, 'custom', 3000, errorText);
-                trySwitchChain(provider);         
-            });
-        }
-    }, [provider, signer, account, active, chainId, connected]);
-
     const onConnect = async (fromButton=true) => {
         if (active && fromButton && CommonService.checkNetworkBasic(chainId)) {    
             disconnect();
@@ -112,6 +87,33 @@ const ConnectWallet = () => {
             });
         }
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            if(!connected){
+                onConnect(false);
+            }
+        }, 1200);
+    });
+
+    useEffect(() => {
+        if (provider && account && active && connected) {            
+            CommonService.setProvider(provider);
+            CommonService.setSigner(signer);
+            CommonService.checkNetwork(chainId).then((isValid) => {
+                if (isValid) {         
+                }else{                    
+                    trySwitchChain(provider);
+                }
+            }).catch((err) => {
+                if (err && err.message && err.code == 4001) { 
+                    
+                }   
+                notify.show(err.message, 'custom', 3000, errorText);
+                trySwitchChain(provider);         
+            });
+        }
+    }, [provider, signer, account, active, chainId, connected]);
 
     // const { connectWallet, disconnectWallet, provider, error } = useWeb3Modal();
 

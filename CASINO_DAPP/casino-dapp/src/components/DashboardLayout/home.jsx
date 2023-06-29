@@ -1,7 +1,10 @@
 import React from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { notify } from 'react-notify-toast';
-//import '../../../public/assets/css/tailwind.css';
+//Images
+import rouletteImg from '@assets/img/roulette_1.jpg';
+import blackjackImg from '@assets/img/blackjack_game_1.jpg'
 
 const DashboardHome = ({}) => {
     const router = useRouter();
@@ -19,9 +22,9 @@ const DashboardHome = ({}) => {
                                 <div className="col-md-12 align-items-center justify-content-center d-flex tw-p-0">
                                     <p className="text-sm mb-0 font-weight-bold text-center">
                                         <div className="object-cover overflow-hidden w-100 h-100">
-                                            <img className="navbar-brand-img pb-1 tw-max-w-lg tw-max-h-lg h-100 w-100" src="../assets/img/roulette_1.jpg" alt="roulette"/>
+                                            <Image className="navbar-brand-img pb-1 tw-max-w-lg tw-max-h-lg h-100 w-100" src={rouletteImg} alt={"roulette"}/>
                                         </div>                                                                                        
-                                        <span id="roulette-text" style={{ fontSize: '1.2em', color: '#ffd700', fontWeight: 600 }}>Wheel of Fortune</span>
+                                        <span id="roulette-text" className='tw-text-xl tw-text-[#ffd700] tw-font-semibold'>Wheel of Fortune</span>
                                     </p>
                                 </div>
                             </div>
@@ -39,9 +42,9 @@ const DashboardHome = ({}) => {
                                 <div className="col-md-12 align-items-center justify-content-center d-flex tw-p-0">
                                     <p className="text-sm mb-0 font-weight-bold text-center">
                                         <div className="object-cover overflow-hidden w-100 h-100">
-                                            <img className="navbar-brand-img pb-1 tw-max-w-lg tw-max-h-lg h-100 w-100" id="blackjack" src="../assets/img/blackjack_game_1.jpg" alt="blackjack"/>                                            
+                                            <Image className="navbar-brand-img pb-1 tw-max-w-lg tw-max-h-lg h-100 w-100" src={blackjackImg} alt={"blackjack"}/>
                                         </div>
-                                        <span id="blackjack-text" style={{ fontSize: '1.2em', color: '#ffd700', fontWeight: 600}}>Blackjack</span>
+                                        <span id="roulette-text" className='tw-text-xl tw-text-[#ffd700] tw-font-semibold'>Blackjack</span>
                                     </p>
                                 </div>
                             </div>

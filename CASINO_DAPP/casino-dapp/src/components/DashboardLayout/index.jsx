@@ -16,7 +16,7 @@ const Index = ({ /*isMobile,*/ title, component }) => {
     return (
         <div className='g-sidenav-show  bg-gray-100'>
             <Head>
-                <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" />
+                {/* <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.7" rel="stylesheet" /> */}
             </Head>
             <div>
                 <DashboardSidebar />
