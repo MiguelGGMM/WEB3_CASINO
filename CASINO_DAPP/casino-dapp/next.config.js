@@ -13,7 +13,7 @@ const nextConfig = {
     },
     eslint: {
         //dirs: ['src']
-        ignoreDuringBuilds: true,
+        //ignoreDuringBuilds: true,
         dirs: ["./app", "./src/pages", "./src", "./src/services", "./src/components"]
     },
     images: {unoptimized:  true}
