@@ -12,5 +12,5 @@
   // }
   //"extends": ["next/core-web-vitals"]
   //"extends": ["next/babel","next/core-web-vitals"]
-   ,"eslint.workingDirectories": ["./app", "./src/pages"]
+   //,"eslint.workingDirectories": ["./app", "./src/pages"]
 }
