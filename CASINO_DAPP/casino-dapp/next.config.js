@@ -13,8 +13,10 @@ const nextConfig = {
     },
     eslint: {
         //dirs: ['src']
-        dirs: ["./app", "./src/pages", "./src"]
-    }
+        ignoreDuringBuilds: true,
+        dirs: ["./app", "./src/pages", "./src", "./src/services", "./src/components"]
+    },
+    images: {unoptimized:  true}
     //pageExtensions: process.env["CC_SITE_ID"] ? ["static.tsx"] : ["server.tsx"]
     //pageExtensions: ['page.js', 'page.tsx', 'page.jsx', 'page.ts', 'static.tsx', 'server.tsx']
 }

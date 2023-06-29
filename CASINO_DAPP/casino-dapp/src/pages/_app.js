@@ -31,6 +31,18 @@ function getLibrary(provider) {
 }
 /////
 
+/* Root stylesheet */
+import "@assets/css/nucleo-icons.css";
+import "@assets/css/nucleo-svg.css";
+import "@assets/css/nucleo-svg.css";
+import "@assets/css/global.css";
+import "@assets/css/tailwind.css";
+import "@assets/css/tailwind-output.css";
+import "@assets/css/global-responsive.css";
+import "@assets/css/animations.css";
+import "@assets/css/soft-design-system.css?v=1.0.9";
+import "@assets/css/soft-ui-dashboard.css?v=1.0.7";
+
 const App = ({ Component, ...rest }) => {
     const [darkMode, setDarkMode] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
@@ -72,7 +84,7 @@ const App = ({ Component, ...rest }) => {
     const muiTheme = darkTheme; //darkMode ? lightTheme : darkTheme;
     
     
-    return (
+    return (        
         <Web3ReactProvider getLibrary={getLibrary}>
             <React.Fragment>
                 <Head>
