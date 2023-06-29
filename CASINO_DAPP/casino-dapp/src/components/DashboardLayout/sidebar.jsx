@@ -30,7 +30,7 @@ const DashboardSidebar = ({}) => {
 
     return (
         <aside
-            className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-white"
+            className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start tw-ml-6 bg-white"
             id="sidenav-main"
             data-color="primary">
             <div className="sidenav-header">
@@ -93,7 +93,7 @@ const DashboardSidebar = ({}) => {
                             <a
                                 href={`https://app.sushi.com/swap?outputCurrency=ETH&chainId=${config.NEXT_PUBLIC_CHAIN_ID}`}
                                 target="_blank"
-                                className="btn btn-warning btn-sm w-100 mb-0 tw-text-black">
+                                className="btn btn-warning btn-sm tw-min-w-max mb-0 tw-text-black">
                                 Buy $ETH
                             </a>
                             { tokenPrice > 0 && 
