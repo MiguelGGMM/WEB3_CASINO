@@ -42,6 +42,7 @@ import "@assets/css/global-responsive.css";
 import "@assets/css/animations.css";
 import "@assets/css/soft-design-system.css?v=1.0.9";
 import "@assets/css/soft-ui-dashboard.css?v=1.0.7";
+//import '@assets/css/soft-ui-dashboard.css?v=1.0.7';
 
 const App = ({ Component, ...rest }) => {
     const [darkMode, setDarkMode] = useState(0);
