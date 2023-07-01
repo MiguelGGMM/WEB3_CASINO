@@ -20,12 +20,12 @@ const DashboardHome = ({}) => {
                         <div className="card-body cursor-pointer">
                             <div className="row align-items-center justify-content-center d-flex overflow-hidden">
                                 <div className="col-md-12 align-items-center justify-content-center d-flex tw-p-0">
-                                    <p className="text-sm mb-0 font-weight-bold text-center">
+                                    <div className="text-sm mb-0 font-weight-bold text-center">
                                         <div className="object-cover overflow-hidden w-100 h-100">
-                                            <Image className="navbar-brand-img pb-1 tw-max-w-lg tw-max-h-lg h-100 w-100" src={rouletteImg} alt={"roulette"}/>
+                                            <Image priority={true} className="navbar-brand-img pb-1 tw-max-w-lg tw-max-h-lg h-100 w-100" src={rouletteImg} alt={"roulette"}/>
                                         </div>                                                                                        
                                         <span id="roulette-text" className='tw-text-xl tw-text-[#ffd700] tw-font-semibold'>Wheel of Fortune</span>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -40,12 +40,12 @@ const DashboardHome = ({}) => {
                         <div className="card-body" style={{ cursor: 'not-allowed' }}>
                             <div className="row align-items-center justify-content-center d-flex overflow-hidden">
                                 <div className="col-md-12 align-items-center justify-content-center d-flex tw-p-0">
-                                    <p className="text-sm mb-0 font-weight-bold text-center">
+                                    <div className="text-sm mb-0 font-weight-bold text-center">
                                         <div className="object-cover overflow-hidden w-100 h-100">
-                                            <Image className="navbar-brand-img pb-1 tw-max-w-lg tw-max-h-lg h-100 w-100" src={blackjackImg} alt={"blackjack"}/>
+                                            <Image priority={true} className="navbar-brand-img pb-1 tw-max-w-lg tw-max-h-lg h-100 w-100" src={blackjackImg} alt={"blackjack"}/>
                                         </div>
                                         <span id="roulette-text" className='tw-text-xl tw-text-[#ffd700] tw-font-semibold'>Blackjack</span>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

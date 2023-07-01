@@ -13,7 +13,7 @@ const DashboardTopBar = ({ title }) => {
             <div className="topbar container-fluid py-1 px-0">
                 <nav aria-label="breadcrumb">
                     <div className="tw-flex tw-flex-row tw-justify-center tw-items-center tw-gap-2">
-                        <Image className="w-100 tw-max-h-[40px] tw-max-w-[30px]" src={casinoIcon} alt="logo"/>
+                        <Image priority={true} className="w-100 tw-max-h-[40px] tw-max-w-[30px]" src={casinoIcon} alt="logo"/>
                         <div className="font-weight-bolder mb-0 gradient-orange-text tw-max-w-[80%]"><span>{ title }</span></div>
                     </div>
                 </nav>

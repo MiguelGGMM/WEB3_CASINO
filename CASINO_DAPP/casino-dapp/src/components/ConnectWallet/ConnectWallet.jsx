@@ -133,6 +133,7 @@ const ConnectWallet = () => {
                 className="button"
                 href="#"
                 onClick={onConnect}
+                title={active && account && CommonService.checkNetworkBasic(chainId) ? "Press for disconnect" : "Press for connect"}
                 // {signerAddress ? handleClickAddress : handleClickConnect}
                 style={{ cursor: 'pointer', fontSize: '1em' }}>
                 {active && account && CommonService.checkNetworkBasic(chainId) ? truncateAddress(account) : "CONNECT"}
