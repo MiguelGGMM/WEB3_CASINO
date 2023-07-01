@@ -9,17 +9,23 @@ import siderbarIcon from "@assets/img/sidebar-icon.png";
 import siderbarRoulette from "@assets/img/sidebar-roulette.jpg";
 import siderbarBlackjack from "@assets/img/sidebar-blackjack.jpg";
 import ethLogo from "@assets/img/eth-logo.png";
+import wrapper from "../../../redux/store";
+import { SET_PRICE } from "../../../redux/types/prices.types";
+
 
 const DashboardSidebar = ({}) => {
     const router = useRouter();
-
+    const { store, props } = wrapper.useWrappedStore({ eth: 0 });
     const isActive = (path) => {
         return path == router.pathname;
     }
 
-    const [tokenPrice, setTokenPrice] = React.useState(0);
+    // Use redux context or session to store last price calculated so we avoid reload effect
+    const [tokenPrice, setTokenPrice] = React.useState(store.getState().prices.eth ?? props.eth);
     const loadTokenPrice = async () => {
-        CommonService.getETHPrice().then(_tokenPrice => {
+        CommonService.getETHPrice().then(_tokenPrice => {                 
+            //store.subscribe(() => console.log(store.getState())); //debug
+            store.dispatch({ type: SET_PRICE, price: { token: 'eth', price: _tokenPrice }});
             setTokenPrice(_tokenPrice);
         });        
     }
@@ -39,7 +45,7 @@ const DashboardSidebar = ({}) => {
                         <a onClick={() => {
                                 router.push(`/`)
                             }} title="Home" alt="Home">
-                            <Image className="navbar-brand-img tw-h-3/4 tw-w-3/4" src={siderbarIcon} alt="sidebarIcon"/>
+                            <Image priority={true} className="navbar-brand-img tw-h-3/4 tw-w-3/4" src={siderbarIcon} alt="sidebarIcon"/>
                         </a>
                 </div>
             </div>
@@ -59,7 +65,7 @@ const DashboardSidebar = ({}) => {
                                 router.push(`/wheel-fortune`)
                             }}>
                             <div className="icon icon-shape icon-sm shadow border-radius-md bg-white-2 text-center me-2 d-flex align-items-center justify-content-center tw-w-8 tw-h-8">
-                            <Image src={siderbarRoulette} className="navbar-brand-img h-100" alt="rouletteLogo"/>    
+                            <Image priority={true} src={siderbarRoulette} className="navbar-brand-img h-100" alt="rouletteLogo"/>    
                             </div>
                             <span className="nav-link-text ms-1">
                                 Wheel of Fortune</span>
@@ -77,7 +83,7 @@ const DashboardSidebar = ({}) => {
                             data-container="body"
                             data-animation="true">
                             <div className="icon icon-shape icon-sm shadow border-radius-md bg-white-2 text-center me-2 d-flex align-items-center justify-content-center tw-w-8 tw-h-8">
-                            <Image src={siderbarBlackjack} className="navbar-brand-img h-100" alt="blackjackLogo"/>    
+                            <Image priority={true} src={siderbarBlackjack} className="navbar-brand-img h-100" alt="blackjackLogo"/>    
                             </div>
                             <span className="nav-link-text ms-1 tw-relative">
                                 Blackjack
@@ -99,7 +105,7 @@ const DashboardSidebar = ({}) => {
                             { tokenPrice > 0 && 
                                 <div className="tw-flex-row tw-flex tw-pt-2 align-items-center tw-pl-1 p-3">
                                     <div className="col-2 tw-pr-1">
-                                        <Image className="h-100 w-100 tw-pr-1 tw-align-text-top" src={ethLogo} alt="ethLogo"/>
+                                        <Image priority={true} className="h-100 w-100 tw-pr-1 tw-align-text-top" src={ethLogo} alt="ethLogo"/>
                                     </div>
                                     <div className="tw-text-sm col-2">
                                         ${tokenPrice}

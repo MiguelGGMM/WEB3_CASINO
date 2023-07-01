@@ -84,7 +84,7 @@
      arbitrumOneMainnet: {
       provider: () => new HDWalletProvider(pk, `https://arbitrum-mainnet.infura.io/v3/8c398630bae943e6bcc06e1d6393a5f3`),
       network_id: 42161,       // Ropsten's id
-      gas: 50000000,        // Ropsten has a lower block limit than mainnet
+      gas: 100000000,        // Ropsten has a lower block limit than mainnet
       gasPrice: 120000000 //0.2 gwei
       //confirmations: 20,    // # of confs to wait between deployments. (default: 0)
       //timeoutBlocks: 20000,  // # of blocks before a deployment times out  (minimum/default: 50)

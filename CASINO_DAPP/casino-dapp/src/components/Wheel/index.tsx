@@ -21,6 +21,9 @@ import { prizeTypeKeys, customDollarPrizeSubtypeKeys } from '../../betsConfig/ty
 import { ContractTransaction } from "ethers";
 import { web3Error } from "@/src/ts/types";
 import contractConfig from "@/src/betsConfig/contractConfig";
+import wrapper from "../../../redux/store";
+import { SET_BALANCES } from "../../../redux/types/balances.types";
+import getOptions from '@/src/betsConfig';
 
 const OperationsBox = dynamic(() => import("./operationsBox"), {
     ssr: false
@@ -32,12 +35,7 @@ import walletIcon from "@assets/img/icons/wallet.png";
 import depositIcon from "@assets/img/icons/deposit.png"
 //const refreshButton = "assets/img/spin/redo.png";
 
-const DEFAULT_DATA_BALANCES = {
-    USER_TOKENS: '0',
-    USER_TOKENS_VALUE: '0',
-    USER_TOKENS_IWALLET: '0',
-    USER_TOKENS_VALUE_IWALLET: '0'
-};
+const ROULETTE_OPTIONS = getOptions();
 
 const DEFAULT_DATA_PROFITS = {
     PROFITS_LEFT_TODAY: '0',
@@ -51,7 +49,13 @@ const DEFAULT_DATA_BETS = {
     PENDING_CLAIM_USER: [] as Array<string>
 };
 
-const WheelLayout = (props: any) => {  
+const WheelLayout = (_props: any) => {  
+    const { store, props } = wrapper.useWrappedStore({
+        USER_TOKENS: '0',
+        USER_TOKENS_VALUE: '0',
+        USER_TOKENS_IWALLET: '0',
+        USER_TOKENS_VALUE_IWALLET: '0'
+    });
     const [tokenBox, setTokenBox] = useState({ 
         name: 'Ethereum', 
         symbol: '$ETH', 
@@ -59,6 +63,7 @@ const WheelLayout = (props: any) => {
         withdrawVal: 0 
     });
 
+    const [rouletteLoading, setRouletteLoading] = React.useState(true);
     const [modalVisible, isModalVisible] = React.useState(false);
     const [messageNode, setMessageNode] : any = React.useState(null);   
     const [backgroundColorDB, setBackgroundColorDB] = React.useState("black");
@@ -67,7 +72,7 @@ const WheelLayout = (props: any) => {
     const [fireConfettiTrigger, setFireConfettiTrigger] = React.useState(false);
     // User data
     const { account, provider } = useWeb3(null);
-    const [dataBalances, setDataBalances] = useState({...DEFAULT_DATA_BALANCES});
+    const [dataBalances, setDataBalances] = useState({...store.getState().balances ?? props});
     const [dataProfits, setDataProfits] = useState({...DEFAULT_DATA_PROFITS});
     const [dataBets, setDataBets] = useState({...DEFAULT_DATA_BETS});
     const [dataBetPaid, setDataBetPaid] = useState<null | any>(null);
@@ -111,7 +116,7 @@ const WheelLayout = (props: any) => {
              <div style={{maxHeight:"120 !important"}}> 
                 <h1 style={{fontSize: '3em', alignItems: 'center', justifyContent: 'center', display: 'flex'}}>
                     { titleMesage }
-                    <Image src={icon} style={{ maxHeight: 50, marginLeft: 10 }} alt="prizeIcon" />
+                    <img src={icon} style={{ maxHeight: 50, marginLeft: 10 }} alt="prizeIcon" /> 
                 </h1>
                 <p style={{alignItems: 'center', justifyContent: 'center', display: 'flex', marginLeft: '3px', marginRight: "3px"}}>You { 
                 `${ prefixBody }` 
@@ -120,6 +125,9 @@ const WheelLayout = (props: any) => {
                 }</span>Claim your bet.</p>
             </div>
         ), backgroundColor);
+        setTimeout(() => {
+            setFireConfettiTrigger(false);
+        }, 2000);
     }
 
     const showModal = (visible: any, node: any, backgroundColor: any) => {
@@ -128,121 +136,136 @@ const WheelLayout = (props: any) => {
         setBackgroundColorDB(backgroundColor);
     }
 
-    const updateRouletteVisibility = async (show: any) => { 
-        let _visibilityControl = 0;
-        if(show){
-            _visibilityControl = 1;            
+    const updateRouletteVisibility = async (show: boolean) => { 
+        setRouletteLoading(show ? false : true);        
+    }
+
+    const runWithValidation = async (_function : Function) => {
+        if(provider)
+        {
+            provider.getNetwork().then((network) => {
+                CommonService.checkNetwork(network.chainId).then(validNetwork => {
+                    if (!validNetwork){ 
+                        return;
+                    }
+                    else
+                    {
+                        _function();
+                    }
+                });
+            });
         }
-        if(document.getElementById("paidBetRoulette") != null) {
-            (document.getElementById("paidBetRoulette") as HTMLElement).style.display = _visibilityControl == 1 ? "flex" : "none";
-        }
-        if(document.getElementById("loadGifRoulettes") != null) {
-            (document.getElementById("loadGifRoulettes") as HTMLElement).style.display = _visibilityControl == 0 ? "flex" : "none";      
-        }  
     }
 
     const reloadUserDataBalances = async () => {
-        if(provider){
-            try 
-            {
-                const network = await provider.getNetwork();
-                const validNetwork = await CommonService.checkNetwork(network.chainId);
-                if (!validNetwork){ 
-                    return;
-                }
-
-                // Balances data (recharge on load and after deposit/withdraw)
-                dataBalances.USER_TOKENS = (parseFloat((await CasinoTreasuryService.getTokensAmount(provider)).toString()) / 10 ** 18).toFixed(5);
-                dataBalances.USER_TOKENS_VALUE = (await CommonService.getETHValue(dataBalances.USER_TOKENS)).toString();
-                dataBalances.USER_TOKENS_IWALLET = (parseFloat((await CasinoTreasuryService.getTokensAmountIWallet(provider)).toString()) / 10 ** 18).toFixed(5);
-                dataBalances.USER_TOKENS_VALUE_IWALLET = (await CommonService.getETHValue(dataBalances.USER_TOKENS_IWALLET)).toString();
-                setDataBalances({...dataBalances});
-            } catch (err) {
-                setDataBalances({...DEFAULT_DATA_BALANCES});
+        if(provider) {
+            const ifError = (err:any) => {
+                setDataBalances({...store.getState().balances});
                 setSnackbarError(err);
                 console.log(err, new Error().stack);
             }
+            runWithValidation(async () => {            
+                // Balances data (recharge on load and after deposit/withdraw)
+                Promise.all([
+                    CasinoTreasuryService.getTokensAmount(provider).then((userTokens) => {
+                        dataBalances.USER_TOKENS = (parseFloat(userTokens.toString()) / 10 ** 18).toFixed(5);
+                    }),
+                    CommonService.getETHValue(dataBalances.USER_TOKENS).then((userTokensValue) => {
+                        dataBalances.USER_TOKENS_VALUE = userTokensValue.toString();
+                    }),
+                    CasinoTreasuryService.getTokensAmountIWallet(provider).then((userTokensIWallet) => {
+                        dataBalances.USER_TOKENS_IWALLET = (parseFloat((userTokensIWallet.toString()).toString()) / 10 ** 18).toFixed(5);
+                    }),
+                    CommonService.getETHValue(dataBalances.USER_TOKENS_IWALLET).then(userTokensValueIWallet => {
+                        dataBalances.USER_TOKENS_VALUE_IWALLET = userTokensValueIWallet.toString();
+                    })
+                ]).then(() => {
+                    store.dispatch({ type: SET_BALANCES, balances: dataBalances});
+                    setDataBalances({...dataBalances});
+                }).catch(ifError)
+            }).catch(ifError)
         }
     }
+
     const reloadUserDataProfits = async () => {
         if(provider){
-            try 
-            {
-                const network = await provider.getNetwork();
-                const validNetwork = await CommonService.checkNetwork(network.chainId);
-                if (!validNetwork){ 
-                    return;
-                }
-
-                // Spins data paid (recharge on load and after paid bet)
-                dataProfits.PROFITS_LEFT_TODAY = Math.max(parseInt(await RouletteService.profitsMadeToday(provider)), 0).toString();
-                dataProfits.PROFITS_LEFT_WEEK = Math.max(parseInt(await RouletteService.profitsMadeWeek(provider)), 0).toString();
-                dataProfits.PROFITS_MAX_TODAY = (await RouletteService.profitsMaxToday(provider)).toString();
-                dataProfits.PROFITS_MAX_WEEK = (await RouletteService.profitsMaxWeek(provider)).toString();
-                setDataProfits({...dataProfits});
-            } catch (err) {
+            const ifError = (err:any) => {
                 setDataProfits({...DEFAULT_DATA_PROFITS});
                 setSnackbarError(err);
                 console.log(err, new Error().stack);
             }
+            runWithValidation(async () => {
+                Promise.all([
+                    RouletteService.profitsMadeToday(provider).then(profitsLeftToday => {
+                        dataProfits.PROFITS_LEFT_TODAY = Math.max(parseInt(profitsLeftToday), 0).toString();
+                    }),
+                    RouletteService.profitsMadeWeek(provider).then(profitsLeftWeek => {
+                        dataProfits.PROFITS_LEFT_WEEK = Math.max(parseInt(profitsLeftWeek), 0).toString();
+                    }),
+                    RouletteService.profitsMaxToday(provider).then(profitsMaxToday => {
+                        dataProfits.PROFITS_MAX_TODAY = profitsMaxToday.toString();
+                    }),
+                    RouletteService.profitsMaxWeek(provider).then(profitsMaxWeek => {
+                        dataProfits.PROFITS_MAX_WEEK = profitsMaxWeek.toString();
+                    })
+                ]).then(() => {
+                    setDataProfits({...dataProfits});
+                }).catch(ifError);
+            }).catch(ifError)
         }
     }
 
     const reloadUserDataBetsData = async () => {
         if(provider){
-            try 
-            {
-                const network = await provider.getNetwork();
-                const validNetwork = await CommonService.checkNetwork(network.chainId);
-                if (!validNetwork){ 
-                    return;
-                }
-
-                // Pending bets user (recharge on load and after performing any bet)
-                dataBets.PENDING_BETS_USER = (await RouletteService.pendingBets(provider)).map(_a => _a.toString());//[];                
-                dataBets.PENDING_CLAIM_USER = (await RouletteService.pendingClaimBets(provider)).map(_a => _a.toString());//[];
-                setDataBets({...dataBets});
-            } catch (err) {
+            const ifError = (err:any) => {
                 setDataBets({...DEFAULT_DATA_BETS});
                 setSnackbarError(err);
                 console.log(err, new Error().stack);
             }
+            runWithValidation(async () => {
+                Promise.all([
+                    RouletteService.pendingBets(provider).then(pendingBetsUser => {
+                        dataBets.PENDING_BETS_USER = pendingBetsUser.map(_a => _a.toString());  
+                    }),
+                    RouletteService.pendingClaimBets(provider).then(pendingClaimUser => {
+                        dataBets.PENDING_CLAIM_USER = pendingClaimUser.map(_a => _a.toString());
+                    })
+                ]).then(() => {
+                    setDataBets({...dataBets});
+                }).catch(ifError);
+            }).catch(ifError)
         }
     }
 
     const reloadUserData = async () => {
         if(provider){
-            try 
-            {
-                const network = await provider.getNetwork();
-                const validNetwork = await CommonService.checkNetwork(network.chainId);
-                if (!validNetwork){ 
-                    return;
-                }
-
-                updateRouletteVisibility(false);
-                await Promise.all([
-                    reloadUserDataBalances(),
-                    reloadUserDataProfits(),
-                    reloadUserDataBetsData()
-                ]);
-                CommonService.refreshETHPriceCache();
-
-                setTimeout(() => updateRouletteVisibility(true), 2000);
-            } catch (err) {
+            const ifError = (err:any) => {
                 setSnackbarError(err);
                 console.log(err, new Error().stack);
             }
+            runWithValidation(async () => {
+                Promise.all([
+                    reloadUserDataBalances(),
+                    reloadUserDataProfits(),
+                    reloadUserDataBetsData()
+                ]).then(() => {
+                    CommonService.refreshETHPriceCache();
+                }).catch(ifError);
+            }).catch(ifError)
         }
     }
 
-    const waitAndReload = async (req: ContractTransaction, untilPendingBets = false) => {
-        await req.wait();
-        if(!untilPendingBets){
-            forceReload();
-        }else{
-            forceReloadUntilPending();
-        }
+    const waitAndReload = async (req: ContractTransaction, untilPendingBets = false, snackbarMsg = '') => {
+        req.wait().then(() => {
+            if(!untilPendingBets){
+                forceReload();
+            }else{
+                forceReloadUntilPending();
+            }
+            if(snackbarMsg) {
+                setSnackbarSuccess(snackbarMsg);
+            }
+        })
     }
 
     const setSnackbarError = async (err: web3Error | unknown) => {
@@ -272,11 +295,12 @@ const WheelLayout = (props: any) => {
         }
         THREAD_RELOAD_USERDATA = setInterval(async () => {
             updateRouletteVisibility(false);
-            await reloadUserDataBetsData();
-            if(dataBets.PENDING_CLAIM_USER.length > 0){
-                setTimeout(() => updateRouletteVisibility(true), 2000);
-                clearInterval(THREAD_RELOAD_USERDATA);
-            }
+            reloadUserDataBetsData().then(() => {
+                if(dataBets.PENDING_CLAIM_USER.length > 0){
+                    setTimeout(() => updateRouletteVisibility(true), 1000);
+                    clearInterval(THREAD_RELOAD_USERDATA);
+                }
+            }) 
         }, 5000);
     }
 
@@ -291,8 +315,10 @@ const WheelLayout = (props: any) => {
     }
 
     React.useEffect(() => {
+        //updateRouletteVisibility(false);
         setFireConfettiTrigger(false);
-        forceReload();        
+        forceReload();     
+        setTimeout(() => updateRouletteVisibility(true), 1000);   
     },[provider, account]);
 
     return (
@@ -318,11 +344,11 @@ const WheelLayout = (props: any) => {
                         <div className="card-body p-3 -tw-mt-7 tw-flex">
                             <div className="tw-flex tw-justify-center tw-flex-col">
                             <h6 className="font-weight-bolder tw-flex tw-text-base tw-text-[#ffffff]">
-                                <Image className="tw-h-5 tw-w-5 tw-mr-2 tw-align-text-top" src={walletIcon} alt="wallet-icon"/>
+                                <Image priority={true} className="tw-h-5 tw-w-5 tw-mr-2 tw-align-text-top" src={walletIcon} alt="wallet-icon"/>
                                 <span className="tw-text-[#f7db2d] tw-pr-1">Wallet:</span> {` ${ dataBalances.USER_TOKENS } $ETH (${ dataBalances.USER_TOKENS_VALUE }$)`}
                             </h6>
                             <h6 className="font-weight-bolder tw-flex tw-text-base tw-text-[#ffffff]">
-                                <Image className="tw-h-5 tw-w-5 tw-mr-2 tw-align-text-top" src={depositIcon} alt="deposit-icon"/>
+                                <Image priority={true} className="tw-h-5 tw-w-5 tw-mr-2 tw-align-text-top" src={depositIcon} alt="deposit-icon"/>
                                 <span className="tw-text-[#f7db2d] tw-pr-1">Deposit:</span> {` ${ dataBalances.USER_TOKENS_IWALLET } $ETH (${ dataBalances.USER_TOKENS_VALUE_IWALLET }$)`}
                             </h6>
                             </div>                                                       
@@ -336,23 +362,26 @@ const WheelLayout = (props: any) => {
                                     <button
                                     className="tw-bg-[#FFD700] tw-text-black tw-font-bold tw-rounded-lg tw-p-2"
                                     onClick={() => {
+                                        updateRouletteVisibility(false);
                                         forceReload();
+                                        setTimeout(() => updateRouletteVisibility(true), 1000);
                                     }}
                                     >{"Refresh"}</button>
  
                                     <Confetti fireConfettiTrigger={fireConfettiTrigger} />
 
-                                    <div id="rowRoulettes" className="row">
-                                        <div id="loadGifRoulettes" className="col tw-overflow-visible tw-flex-col tw-justify-center tw-items-center tw-mb-7" style={{ display: 'flex' }}>
+                                    <div id="rowRoulettes">
+                                        <div className={`col tw-overflow-visible tw-flex-col tw-justify-center tw-items-center tw-mb-7 ${ rouletteLoading ? "d-flex" : "d-none" }`} /* style={{display: rouletteLoading ? "flex" : "none" }} */>
                                             <Image src={loadingGif} alt="loadingGif"/>
                                             <div className="tw-h-9"></div>
                                         </div>
-
-                                        <div id="paidBetRoulette" className="col tw-overflow-visible tw-flex-col tw-justify-center tw-items-center" style={{ display: 'none' }}>
+                                        
+                                        <div className={`col tw-overflow-visible tw-flex-col tw-justify-center tw-items-center ${ rouletteLoading ? "d-none" : "d-flex" }`} /* style={{display: rouletteLoading ? "none" : "flex" }} */>
                                             <div className="tw-mt-7">
                                                 <RoulettePaid 
                                                     bet={dataBetPaid}
-                                                    onWin={onWin}                                                    
+                                                    onWin={onWin}
+                                                    ROULETTE_OPTIONS={ROULETTE_OPTIONS}                                                    
                                                 />
                                             </div>
                                             <div className="tw-text-center">Profits Today: { dataProfits.PROFITS_LEFT_TODAY } / { dataProfits.PROFITS_MAX_TODAY }</div>
@@ -367,8 +396,7 @@ const WheelLayout = (props: any) => {
                                                         onClick={() => {
                                                             if(provider) {
                                                                 RouletteService.performPaidBet(betA, provider).then((ans) => {
-                                                                    waitAndReload(ans, true);
-                                                                    setSnackbarSuccess( `Paid ${betA}$ Bet Performed Successfully, Good Luck!`);                                              
+                                                                    waitAndReload(ans, true,  `Paid ${betA}$ Bet Performed Successfully, Good Luck!`);
                                                                 }).catch((err) => {
                                                                     setSnackbarError(err);
                                                                 });
@@ -376,23 +404,24 @@ const WheelLayout = (props: any) => {
                                                         }}>
                                                         {`BET ${betA}$`}</button>)
                                                 })}                                  
-                                            </div>                                                                                    
-                                        </div>                                        
+                                        </div>                                                                                    
+                                        </div> 
                                     </div>   
 
-                                    <div className="row">
+                                    <div>
                                         <div className="col tw-overflow-visible tw-flex tw-justify-center tw-items-center">
                                             <ResponsiveDialog visible={modalVisible} content={messageNode} title={''} fatherId={"wheel-container"} 
                                             dialogStyle={{ '& .MuiPaper-root': {background: backgroundColorDB}, boxShadow: 'none'}}/>
                                         </div>
                                     </div>
 
-                                    <div className="row tw-mt-3">
+                                    <div className="tw-mt-3">
                                         <div className="col tw-overflow-hidden tw-flex tw-justify-center tw-items-center">
                                             { (dataBets.PENDING_CLAIM_USER && dataBets.PENDING_CLAIM_USER.length > 0) &&
                                                 <button 
                                                 className="tw-cursor-pointer tw-bg-[#FFD700] tw-text-[black] tw-font-bold tw-rounded-lg tw-p-2 tw-pl-2 tw-pr-2 tw-mr-2"
-                                                id="spinButton"
+                                                disabled={enabledConfirmButton}
+                                                title={enabledConfirmButton ? "Already spinned" : ""}
                                                 onClick={() => {
                                                     if(provider && dataBets.PENDING_CLAIM_USER.length >= 1) {
                                                         let betClaim = dataBets.PENDING_CLAIM_USER[0];
@@ -402,10 +431,6 @@ const WheelLayout = (props: any) => {
                                                                     updateRouletteVisibility(false);
                                                                     setDataBetPaid(betData); 
                                                                     setEnabledConfirmButton(true);
-                                                                    if(document.getElementById("spinButton") != null) {       
-                                                                        (document.getElementById("spinButton") as HTMLButtonElement).disabled=true;
-                                                                        (document.getElementById("spinButton") as HTMLButtonElement).title="Already spinned";
-                                                                    }
                                                                     setTimeout(() => updateRouletteVisibility(true), 1000);
                                                                     var audio = new Audio('/assets/media/sounds/roulette.mp3');
                                                                     setTimeout(() => {audio.play()}, 2000);               
@@ -420,6 +445,7 @@ const WheelLayout = (props: any) => {
                                                 <button 
                                                 className="tw-cursor-pointer tw-bg-[#FFD700] tw-text-[black] tw-font-bold tw-rounded-lg tw-p-2 tw-pl-2 tw-pr-2 tw-mr-2"
                                                 disabled={!enabledConfirmButton}
+                                                title={!enabledConfirmButton ? "Spin first" : ""}
                                                 onClick={() => {
                                                     if(provider && dataBets.PENDING_CLAIM_USER.length >= 1) {
                                                         let betClaim = dataBets.PENDING_CLAIM_USER[0];
@@ -429,11 +455,8 @@ const WheelLayout = (props: any) => {
                                                             setMessageNode('');                                                   
                                                             setEnabledConfirmButton(false);                                                    
                                                             RouletteService.getPrizeFromBetIndex(provider, betClaim).then((_ans) => {
-                                                                waitAndReload(ans);
-                                                                setSnackbarSuccess(`You Bet with id ${betClaim} was Claimed, you ${_ans}`, 2000);                                                  
+                                                                waitAndReload(ans, false, `You Bet with id ${betClaim} was Claimed, you ${_ans}`);                                              
                                                             });                            
-                                                            (document.getElementById("spinButton") as HTMLButtonElement).disabled=false;                        
-                                                            (document.getElementById("spinButton") as HTMLButtonElement).title=''; 
                                                             setTimeout(() => updateRouletteVisibility(true), 1000);
                                                         }).catch((err) => {
                                                             setSnackbarError(err);
@@ -449,8 +472,7 @@ const WheelLayout = (props: any) => {
                                                     if(provider && dataBets.PENDING_BETS_USER.length >= 1) {
                                                         let betCancel = dataBets.PENDING_BETS_USER[0];
                                                         RouletteService.cancelBet(betCancel, provider).then((ans) => {
-                                                            waitAndReload(ans);
-                                                            setSnackbarSuccess(`You Bet with id ${betCancel} was Cancelled, if it was a paid bet your money was returned`);                                                  
+                                                            waitAndReload(ans, false, `You Bet with id ${betCancel} was Cancelled, if it was a paid bet your money was returned`);
                                                         }).catch((err) => {
                                                             setSnackbarError(err);
                                                         });
