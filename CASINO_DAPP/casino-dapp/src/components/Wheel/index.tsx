@@ -318,7 +318,7 @@ const WheelLayout = (_props: any) => {
         //updateRouletteVisibility(false);
         setFireConfettiTrigger(false);
         forceReload();     
-        setTimeout(() => updateRouletteVisibility(true), 2000);   
+        setTimeout(() => updateRouletteVisibility(true), 1000);   
     },[provider, account]);
 
     return (
