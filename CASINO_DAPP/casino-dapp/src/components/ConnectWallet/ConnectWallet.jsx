@@ -1,145 +1,119 @@
-/**
- * Button to connect your wallet
- */
-
-import React, { useEffect, useState } from "react";
+import { useRef, useEffect /* useState */, useState } from 'react'
+import config from '../../config'
+import { notify } from 'react-notify-toast'
+import { useWeb3 } from '../../hooks/useWeb3'
 import {
-    // ConnectButton,
-    // ConnectButtonImage,
-    // Container,
-    MainContainer,
-} from "./styles";
+  // ConnectButton,
+  // ConnectButtonImage,
+  // Container,
+  MainContainer,
+} from './styles'
 
-//import SnackbarElement from '../../utils/SnackbarElement';// @mui/material';
-import { notify } from 'react-notify-toast';
-//import { useSelector, useDispatch } from "react-redux";
-//import { useWeb3Modal } from "../../hooks/web3";
-import { useWeb3 } from '../../hooks/useWeb3';
-import Web3 from 'web3';
-//import { getPrice } from "../../utils/web3helper";
-import CommonService from "../../services/CommonService";
-
-const errorText = {
-    background: 'red',
-    text: 'white'
-}
 const truncateAddress = (address) => {
-    return address.slice(0, 6) + "..." + address.slice(-4);
-};
+  return address.slice(0, 6) + '...' + address.slice(-4)
+}
 
-const ConnectWallet = () => {
+export default function ConnectWallet() {
+  /* const [loading, setLoading] = useState(false); */
+  const {
+    getAddress,
+    getChainId,
+    getProvider,
+    /* getSigner */
+    open,
+    /* switchNetwork, */
+    switchNetworkAsync,
+    disconnect,
+    /* connector,        */
+    // chains,
+    isConnected,
+    /* pendingChainId */
+  } = useWeb3()
 
-    const {
-        chainId,
-        account,
-        active,
-        //library,
-        provider,
-        signer,
-        connect,
-        disconnect
-    } = useWeb3();
+  /* const label = isConnected ? 'Press for disconnect' : 'Press for connect' */
+  const intervalSwitch = useRef()
+  const reqFlag = useRef(false)
+  const [address, setAddress] = useState('')
 
-    const [connected, isConnected] = useState(false);
-    //const [snackbar, setSnackbar] = useState({ open: false });
+  const switchNetworkWithWarning = () => {
+    setTimeout(() => {
+      if (!reqFlag.current && switchNetworkAsync) {
+        notify.show(
+          `You need to switch your network in order to use the dapp!`,
+          'custom',
+          3000,
+          { background: 'red', text: 'white' },
+        )
+        reqFlag.current = true
+        switchNetworkAsync?.(config.NEXT_PUBLIC_CHAIN_ID)
+          .then(() => {
+            reqFlag.current = false
+          })
+          .catch(() => {
+            reqFlag.current = false
+          })
+      }
+    }, 1000)
+  }
 
-    const trySwitchChain = async (provider) => {
-        if(provider && provider.provider) {     
-            notify.show(`You need to switch your network in order to use the dapp!`, 'custom', 3000, errorText);
-            setTimeout(() => {
-                provider.provider.request({
-                    method: 'wallet_switchEthereumChain',
-                    params: [{ chainId: Web3.utils.toHex(CommonService.getChainId()) }]
-                }, () => {
-                    // Do nothing
-                });
-            }, 1500);
-        }
+  useEffect(() => {
+    if (intervalSwitch.current) {
+      clearInterval(intervalSwitch.current)
     }
-
-    const onConnect = async (fromButton=true) => {
-        if (active && fromButton && CommonService.checkNetworkBasic(chainId)) {    
-            disconnect();
-        } else {                        
-            // Check network
-            CommonService.checkNetwork(chainId).then((isValid) => {   
-                if(isValid || !chainId) {                        
-                    connect().then(() => {
-                        isConnected(true);
-                        if(!chainId) {
-                            //trySwitchChain(provider);
-                        }
-                    }).catch((err) => {
-                        if (err.message) {                            
-                            notify.show(err.message, 'custom', 3000, errorText);
-                        }
-                        trySwitchChain(provider);
-                    });
-                } else {      
-                    trySwitchChain(provider);
-                }
-            }).catch((err) => {
-                if (err && err.message && err.code == 4001) { 
-                    /** Refused transaction */ 
-                    notify.show(err.message, 'custom', 3000, errorText);
-                }
-                trySwitchChain(provider);
-            });
-        }
-    }
-
-    useEffect(() => {
-        setTimeout(() => {
-            if(!connected){
-                onConnect(false);
+    intervalSwitch.current = setInterval(() => {
+      //If not connected to our network we switch
+      if (isConnected && getChainId) {
+        getChainId().then((chainId) => {
+          if (chainId != config.NEXT_PUBLIC_CHAIN_ID) {
+            switchNetworkWithWarning()
+          }
+        })
+      }
+      //If user switches to a different network we switch again
+      if (getProvider) {
+        getProvider().then((provider) => {
+          provider.on('chainChanged', (chainId) => {
+            if (parseInt(chainId) != config.NEXT_PUBLIC_CHAIN_ID) {
+              switchNetworkWithWarning()
             }
-        }, 1200);
-    });
+          })
+        })
+      }
 
-    useEffect(() => {
-        if (provider && account && active && connected) {            
-            CommonService.setProvider(provider);
-            CommonService.setSigner(signer);
-            CommonService.checkNetwork(chainId).then((isValid) => {
-                if (isValid) {         
-                }else{                    
-                    trySwitchChain(provider);
-                }
-            }).catch((err) => {
-                if (err && err.message && err.code == 4001) { 
-                    
-                }   
-                notify.show(err.message, 'custom', 3000, errorText);
-                trySwitchChain(provider);         
-            });
-        }
-    }, [provider, signer, account, active, chainId, connected]);
+      if (getAddress) {
+        getAddress().then((_address) => {
+          setAddress(_address)
+        })
+      }
+    }, 1000)
+  })
 
-    // const { connectWallet, disconnectWallet, provider, error } = useWeb3Modal();
+  async function onOpen() {
+    /* setLoading(true); */
+    await open({ route: 'ConnectWallet' })
+    /* setLoading(false); */
+  }
 
-    // const handleClickConnect = async () => {
-    //     await connectWallet();
-    //     window.location.reload();
-    // };
+  function onClick() {
+    if (isConnected) {
+      disconnect()
+    } else {
+      onOpen()
+    }
+  }
 
-    // const handleClickAddress = () => {
-    //     disconnectWallet();
-    //     window.location.reload();
-    // };
-
-    return (
-        <MainContainer>
-            <div
-                className="button"
-                href="#"
-                onClick={onConnect}
-                title={active && account && CommonService.checkNetworkBasic(chainId) ? "Press for disconnect" : "Press for connect"}
-                // {signerAddress ? handleClickAddress : handleClickConnect}
-                style={{ cursor: 'pointer', fontSize: '1em' }}>
-                {active && account && CommonService.checkNetworkBasic(chainId) ? truncateAddress(account) : "CONNECT"}
-            </div>       
-        </MainContainer>        
-    );
-};
-
-export default ConnectWallet;
+  return (
+    <MainContainer>
+      <div
+        className="button"
+        href="#"
+        onClick={onClick}
+        title={isConnected ? 'Press for disconnect' : 'Press for connect'}
+        // {signerAddress ? handleClickAddress : handleClickConnect}
+        style={{ cursor: 'pointer', fontSize: '1em' }}
+      >
+        {isConnected && address ? truncateAddress(address) : 'CONNECT'}
+      </div>
+    </MainContainer>
+  )
+}

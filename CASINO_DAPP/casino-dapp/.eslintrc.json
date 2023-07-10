@@ -1,16 +1,80 @@
 {
-  "extends": ["next"]
-  //,"plugins": ["react"]
-  // ,"parserOptions": {
-  //   "ecmaFeatures": {
-  //     "jsx": true
-  //   }
-  // },
-  // "rules": {
-  //   "react/jsx-uses-react": "error",
-  //   "react/jsx-uses-vars": "error"
-  // }
-  //"extends": ["next/core-web-vitals"]
-  //"extends": ["next/babel","next/core-web-vitals"]
-   //,"eslint.workingDirectories": ["./app", "./src/pages"]
+  "extends": [
+    "eslint:recommended",
+    "next",
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "settings": {
+    "next": {
+      "rootDir": "src/*/"
+    }
+  },
+  "parser": "@typescript-eslint/parser",
+  //   "parserOptions": {
+  //     // "ecmaVersion": 2022,
+  //     // "sourceType": "script",
+  //     "project": "./tsconfig.json" // <-- Point to your project's tsconfig.json or create new one
+  //   },
+  "plugins": [
+    "@typescript-eslint"
+    // "deprecation"
+  ],
+  "rules": {
+    // "react/no-unescaped-entities": "off",
+    // "@next/next/no-page-custom-font": "off"
+    // '@typescript-eslint/no-var-requires': 0,
+    // "no-unused-vars": "off",
+    // "@typescript-eslint/no-unused-vars": ["error"]
+    //"@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    //"@typescript-eslint/no-unused-vars": "error",
+    //"no-unused-vars": "off"
+    // "deprecation/deprecation": "warn"
+    "no-await-in-loop": "error",
+    "no-duplicate-imports": "error",
+    "no-new-native-nonconstructor": "error",
+    "no-promise-executor-return": "warn",
+    "no-async-promise-executor": "error",
+    "no-self-compare": "error",
+    "no-template-curly-in-string": "warn",
+    "no-unmodified-loop-condition": "warn",
+    "no-unreachable-loop": "error",
+    "no-unused-private-class-members": "error",
+    "no-use-before-define": "warn",
+    "require-atomic-updates": "warn",
+    "use-isnan": "error",
+    "block-scoped-var": "error",
+    "camelcase": "warn",
+    "consistent-return": "error",
+    "default-case": "error",
+    "id-length": "warn",
+    "func-names": ["error", "as-needed"],
+    "max-lines": "warn",
+    "max-depth": "error",
+    "max-classes-per-file": "error",
+    "max-nested-callbacks": "error",
+    "max-params": ["error", { "max": 5 }],
+    "max-statements": ["warn", { "max": 20 }],
+    "complexity": ["error", { "max": 20 }],
+    "no-console": "warn",
+    "no-continue": "warn",
+    "no-else-return": "error",
+    "no-empty-function": "error",
+    "no-eval": "error",
+    "no-lonely-if": "error",
+    "no-loop-func": "error",
+    /* "no-magic-numbers": "error" */
+    "no-nested-ternary": "warn",
+    "no-return-await": "error",
+    "no-return-assign": "error",
+    "no-useless-return": "error",
+    "no-useless-concat": "error",
+    "no-useless-escape": "error",
+    "no-useless-rename": "error",
+    "no-var": "error",
+    "require-await": "error"
+  },
+  "ignorePatterns": ["**/abis/*.ts"]
 }

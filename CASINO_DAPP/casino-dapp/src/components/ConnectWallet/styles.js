@@ -1,7 +1,7 @@
 /**
  * Styled components
  */
-import styled from "styled-components";
+import styled from 'styled-components'
 
 // export const ConnectButton = styled("a")({
 //   cursor: "pointer",
@@ -31,9 +31,9 @@ import styled from "styled-components";
 //   justifyContent: "center",
 // });
 
-export const MainContainer = styled("div")({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  margin: "10px",
-});
+export const MainContainer = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  margin: '10px',
+})

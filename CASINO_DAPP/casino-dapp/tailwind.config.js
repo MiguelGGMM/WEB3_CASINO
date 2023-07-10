@@ -6,8 +6,8 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/**/*.{js,ts,jsx,tsx,mdx}',    
-    './src/components/DashboardLayout/*.{js,ts,jsx,tsx,mdx}'
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/DashboardLayout/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -17,11 +17,10 @@ module.exports = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       maxWidth: {
-        '1/2': '50%'
-      }
+        '1/2': '50%',
+      },
     },
   },
-  plugins: [
-  ],
-  important: true
+  plugins: [],
+  important: true,
 }
