@@ -5,7 +5,7 @@ const nextConfig = {
   //     webpack5: true
   // }
   reactStrictMode: false,
-  distDir: 'build',
+  /* distDir: 'build', */
   // swcMinify: true,
   compiler: {
     // ssr and displayName are configured by default
