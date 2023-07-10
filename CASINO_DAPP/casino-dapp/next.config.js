@@ -13,7 +13,7 @@ const nextConfig = {
   },
   eslint: {
     //dirs: ['src']
-    ignoreDuringBuilds: false,
+    ignoreDuringBuilds: true,
     dirs: [
       './app',
       './src/pages',
@@ -25,7 +25,7 @@ const nextConfig = {
   images: { unoptimized: true } /* not working? */,
   //pageExtensions: process.env["CC_SITE_ID"] ? ["static.tsx"] : ["server.tsx"]
   //pageExtensions: ['page.js', 'page.tsx', 'page.jsx', 'page.ts', 'static.tsx', 'server.tsx']
-//   output: 'export',
+  output: 'export',
 }
 
 module.exports = nextConfig //withSentryConfig(nextConfig)
