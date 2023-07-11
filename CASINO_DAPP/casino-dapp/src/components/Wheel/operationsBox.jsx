@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import _ from 'lodash'
 import { makeStyles } from '@material-ui/core/styles'
 import { InputAmount } from '../../styles/wheel'
 import { CircularProgress } from '@material-ui/core'
