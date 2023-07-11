@@ -25,7 +25,7 @@ const nextConfig = {
   images: { unoptimized: true } /* not working? */,
   //pageExtensions: process.env["CC_SITE_ID"] ? ["static.tsx"] : ["server.tsx"]
   //pageExtensions: ['page.js', 'page.tsx', 'page.jsx', 'page.ts', 'static.tsx', 'server.tsx']
-  // output: 'export', //crash for vercel deployment!!!
+  // output: 'export', //crash for vercel deployment!!! comment or indicate .next on vercel as build folder
 }
 
 module.exports = nextConfig //withSentryConfig(nextConfig)
