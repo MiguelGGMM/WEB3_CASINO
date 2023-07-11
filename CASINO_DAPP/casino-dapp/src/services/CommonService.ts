@@ -33,11 +33,12 @@ const CommonService: ICommonService = {
   getETHPrice: async () => {
     try {
       if (CommonService.ethPriceCache == 0) {
-        const data = await axios.get(
+        const data = await fetch(
           'https://api.coinbase.com/v2/prices/ETH-USD/spot',
         )
-        if (data.data && data.data.data && data.data.data.amount) {
-          CommonService.ethPriceCache = parseInt(data.data.data.amount)
+        const ans = await data.json();
+        if (ans.data && ans.data.amount) {
+          CommonService.ethPriceCache = parseInt(ans.data.amount)
         }
       }
       return CommonService.ethPriceCache
