@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { ethers } from 'ethers'
 import { ICommonService } from '../ts/interfaces'
 import config from '../config'
