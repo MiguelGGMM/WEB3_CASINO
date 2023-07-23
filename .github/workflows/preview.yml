@@ -10,7 +10,7 @@ jobs:
   Deploy-Preview:
     defaults:
         run:
-          working-directory: ../CASINO_DAPP/casino-dapp
+          working-directory: ./CASINO_DAPP/casino-dapp
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
