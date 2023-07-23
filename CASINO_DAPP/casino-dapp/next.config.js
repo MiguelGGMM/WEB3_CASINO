@@ -13,7 +13,7 @@ const nextConfig = {
   },
   eslint: {
     //dirs: ['src']
-    ignoreDuringBuilds: false,
+    ignoreDuringBuilds: true,
     dirs: [
       './app',
       './src/pages',

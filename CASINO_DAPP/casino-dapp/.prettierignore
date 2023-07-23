@@ -2,6 +2,7 @@
 **/public/assets/scss/
 **/public/assets/js/
 src/abis
+pnpm-lock.yaml
 
 # BELOW COPY PASTED FROM GITIGNORE
 
@@ -44,4 +45,4 @@ next-env.d.ts
 # others
 package-lock.json
 
-.env
+.vercel

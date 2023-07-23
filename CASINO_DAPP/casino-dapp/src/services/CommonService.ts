@@ -35,7 +35,7 @@ const CommonService: ICommonService = {
         const data = await fetch(
           'https://api.coinbase.com/v2/prices/ETH-USD/spot',
         )
-        const ans = await data.json();
+        const ans = await data.json()
         if (ans.data && ans.data.amount) {
           CommonService.ethPriceCache = parseInt(ans.data.amount)
         }
