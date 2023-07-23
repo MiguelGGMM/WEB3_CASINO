@@ -45,44 +45,44 @@ jobs:
             cd CASINO_DAPP/casino-dapp
             pnpm run format
 
-  Build:
-    runs-on: ubuntu-latest
-    steps:
-      # PNPM
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
-        with:
-            version: 8
-            run_install: false        
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-            echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+# replaced by vercel-build        
+#   Build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       # PNPM
+#       - uses: pnpm/action-setup@v2
+#         name: Install pnpm
+#         id: pnpm-install
+#         with:
+#             version: 8
+#             run_install: false        
+#       - name: Get pnpm store directory
+#         id: pnpm-cache
+#         shell: bash
+#         run: |
+#             echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-            path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-            key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-            restore-keys: |
-                ${{ runner.os }}-pnpm-store-
-      # PNPM 
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        run: |
-            cd CASINO_DAPP/casino-dapp 
-            pnpm install
-      - name: Run build
-        run: |
-            cd CASINO_DAPP/casino-dapp 
-            pnpm run build
+#       - uses: actions/cache@v3
+#         name: Setup pnpm cache
+#         with:
+#             path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+#             key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+#             restore-keys: |
+#                 ${{ runner.os }}-pnpm-store-
+#       # PNPM 
+#       - uses: actions/checkout@v3
+#       - name: Install dependencies
+#         run: |
+#             cd CASINO_DAPP/casino-dapp 
+#             pnpm install
+#       - name: Run build
+#         run: |
+#             cd CASINO_DAPP/casino-dapp 
+#             pnpm run build
 
   #Test: #TODO with cypress
 
-  Deploy-Preview:
-    needs: [Codechecks, Build]
+  Vercel-build:
     runs-on: ubuntu-latest
     steps:
     # PNPM
@@ -113,5 +113,39 @@ jobs:
         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }} --debug
+      - uses: actions/upload-artifact@v2
+        with:
+            name: verceloutput
+            path: .vercel/output                
+
+  Deploy-Preview:
+    needs: [Codechecks, Vercel-build]
+    runs-on: ubuntu-latest
+    steps:
+    # PNPM
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+            version: 8
+            run_install: false        
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+            echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+            path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+            key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+            restore-keys: |
+                ${{ runner.os }}-pnpm-store-
+    # PNPM
+      - uses: actions/download-artifact@v2
+        with:
+            name: verceloutput
+            path: .vercel/output  
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
