@@ -33,11 +33,17 @@ jobs:
             # PNPM 
           - uses: actions/checkout@v3
           - name: Install dependencies
-            run: pnpm install
+            run: |
+                cd CASINO_DAPP/casino-dapp
+                pnpm install
           - name: Run linter checks
-            run: pnpm run lint
+            run: |
+                cd CASINO_DAPP/casino-dapp
+                pnpm run lint
           - name: Run prettier checks
-            run: pnpm run format
+            run: |
+                cd CASINO_DAPP/casino-dapp
+                pnpm run format
 
   Build:
         runs-on: ubuntu-latest
@@ -65,9 +71,13 @@ jobs:
           # PNPM 
           - uses: actions/checkout@v3
           - name: Install dependencies
-            run: pnpm install
+            run: |
+                cd CASINO_DAPP/casino-dapp
+                pnpm install
           - name: Run build
-            run: pnpm run build
+            run: |
+                cd CASINO_DAPP/casino-dapp
+                pnpm run build
     
   #Test: #TODO
     
