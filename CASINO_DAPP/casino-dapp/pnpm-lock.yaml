@@ -11,6 +11,12 @@ dependencies:
   '@emotion/styled':
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.11)(react@18.2.0)
+  '@ethersproject/abi':
+    specifier: ^5.7.0
+    version: 5.7.0
+  '@ethersproject/providers':
+    specifier: ^5.7.2
+    version: 5.7.2
   '@material-ui/core':
     specifier: ^4.12.4
     version: 4.12.4(@types/react@18.2.11)(react-dom@18.2.0)(react@18.2.0)
