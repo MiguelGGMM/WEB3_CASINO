@@ -60,6 +60,8 @@ import '@assets/css/soft-design-system.css?v=1.0.9'
 import '@assets/css/soft-ui-dashboard.css?v=1.0.7'
 //import '@assets/css/soft-ui-dashboard.css?v=1.0.7';
 
+import favIcon from "@assets/img/fav.png";
+
 const App = ({ Component, ...rest }) => {
   const [ready, setReady] = useState(false)
   const [, /* darkMode */ setDarkMode] = useState(0)
@@ -115,6 +117,8 @@ const App = ({ Component, ...rest }) => {
               <meta httpEquiv="cache-control" content="no-cache" />
               <meta httpEquiv="expires" content="0" />
               <meta httpEquiv="pragma" content="no-cache" />
+
+              <link rel="shortcut icon" type="image/x-icon" href={favIcon.src} />
 
               {/* <meta property="og:type" content="website" />
                             <meta property="og:title" content="web3-casino-dapp" />
