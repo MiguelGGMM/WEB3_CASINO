@@ -39,7 +39,6 @@
     "ethers": "5.7",
     "lodash": "^4.17.21",
     "next": "13.4.5",
-    "next-auth": "^4.22.1",
     "next-redux-wrapper": "^8.1.0",
     "postcss": "8.4.24",
     "prettier": "^3.0.0",
