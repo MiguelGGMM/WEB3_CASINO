@@ -3,7 +3,6 @@ import Head from 'next/head'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles'
-import { SessionProvider } from 'next-auth/react'
 import { CookiesProvider } from 'react-cookie'
 
 // REDUX -> https://redux.js.org/introduction/getting-started
@@ -150,11 +149,9 @@ const App = ({ Component, ...rest }) => {
                 >
                   <div className={classes.content}>
                     <Provider store={store}>
-                      <SessionProvider session={pageProps && pageProps.session}>
-                        <CookiesProvider>
-                          <Component {...pageProps} isMobile={isMobile} />
-                        </CookiesProvider>
-                      </SessionProvider>
+                      <CookiesProvider>
+                        <Component {...pageProps} isMobile={isMobile} />
+                      </CookiesProvider>
                     </Provider>
                   </div>
                 </div>

@@ -5,3 +5,4 @@ SOLIDITY/.env
 SOLIDITY/package-lock.json
 SOLIDITY/.blockExplorerKey
 DAPP
+.vercel
