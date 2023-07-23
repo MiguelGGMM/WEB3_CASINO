@@ -7,15 +7,15 @@
 // };
 ///////
 
-import { configureStore } from "@reduxjs/toolkit";
-import { reducers } from "./reducers";
-import { createWrapper } from "next-redux-wrapper";
+import { configureStore } from '@reduxjs/toolkit'
+import { reducers } from './reducers'
+import { createWrapper } from 'next-redux-wrapper'
 
 const initStore = () => {
   //return createStore(reducers, applyMiddleware(thunk));
-  return configureStore({ reducer: reducers });
-};
+  return configureStore({ reducer: reducers })
+}
 
-const wrapper = createWrapper(initStore);
+const wrapper = createWrapper(initStore)
 
-export default wrapper;
+export default wrapper

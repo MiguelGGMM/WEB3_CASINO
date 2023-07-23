@@ -33,7 +33,7 @@
 //     const {
 //         onClose
 //     } = props;
-    
+
 //     return (
 //         <Snackbar
 //             {...props}

@@ -1,28 +1,28 @@
 {
-    "help": "You can use this config for checking spin, confirm and cancel buttons style, also spin animation and win/lose dialog",
-    "enabled": false,
-    "config": {
-        "pendingBet":{
-            "enabled": false,
-            "index": "1",
-            "user": "your testing wallet address",
-            "betAmount": "25",
-            "_type": 0,
-            "state": 1,
-            "prizeWon": 0,
-            "customPrizeDollarAmountWonType": 0,
-            "NFTwonType": 0
-        },
-        "pendingBetClaim":{
-            "enabled": false,
-            "index": "2",
-            "user": "your testing wallet address",
-            "betAmount": "25",
-            "_type": 1,
-            "state": 2,
-            "prizeWon": 1,
-            "customPrizeDollarAmountWonType": 0,
-            "NFTwonType": 0
-          }
+  "help": "You can use this config for checking spin, confirm and cancel buttons style, also spin animation and win/lose dialog",
+  "enabled": false,
+  "config": {
+    "pendingBet": {
+      "enabled": false,
+      "index": "1",
+      "user": "your testing wallet address",
+      "betAmount": "25",
+      "_type": 0,
+      "state": 1,
+      "prizeWon": 0,
+      "customPrizeDollarAmountWonType": 0,
+      "NFTwonType": 0
+    },
+    "pendingBetClaim": {
+      "enabled": false,
+      "index": "2",
+      "user": "your testing wallet address",
+      "betAmount": "25",
+      "_type": 1,
+      "state": 2,
+      "prizeWon": 1,
+      "customPrizeDollarAmountWonType": 0,
+      "NFTwonType": 0
     }
+  }
 }
