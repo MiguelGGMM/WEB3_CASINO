@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.1.6",
+    "bn.js": "^5.2.1",
     "dotenv": "^16.1.4",
     "ganache": "^7.7.4",
     "lodash": "^4.17.21",
+    "pnpm": "^8.6.10",
     "truffle-contract-size": "^2.0.1",
     "truffle-plugin-verify": "^0.6.3"
   }

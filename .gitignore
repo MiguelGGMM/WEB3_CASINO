@@ -1,7 +1,6 @@
 SOLIDITY/node_modules
 SOLIDITY/build
 SOLIDITY/.pk
-SOLIDITY/.env
 SOLIDITY/package-lock.json
 SOLIDITY/.blockExplorerKey
 DAPP
