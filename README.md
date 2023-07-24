@@ -27,6 +27,10 @@
 <a href=https://vercel.com/workflow>Vercel</a> enables built-in CI/CD for your frontend project
 <img>https://web3-casino.vercel.app/</img>
 
+## CI
+
+We have talked about Vercel built-in CI/CD, however, we are using vercel CLI because we want full control of our CI/CD workflow, .yml files has been added for preview (dev branch) and production (main branch), code checks like prettier and linter are run in parallel with vercel build, once both finish successfully our built project is deployed on vercel
+
 ## Previews and videos
 
 <a href=https://res.cloudinary.com/dxouzehk9/video/upload/v1687902978/web3_casino/won-roulette_xkkdu8.mp4 target="_blank"><picture><img target="_blank" src="https://github.com/MiguelGGMM/WEB3_CASINO/assets/104460442/fa513197-5ae2-495a-a050-e8cb7e3de5a8" /></picture></a>
