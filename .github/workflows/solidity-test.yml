@@ -17,7 +17,7 @@ on:
 
 jobs:
   ganache:
-    name: truffle-test
+    name: Run ganache
     runs-on: ubuntu-22.04
 
     strategy:
@@ -66,11 +66,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Run ganache
-        run: pnpm run ganacheFork &
+        run: |
+            cd SOLIDITY
+            pnpm run ganacheFork &
 
   truffle-test:
     needs: [ganache]
-    name: truffle-test
+    name: truffle-tests
     runs-on: ubuntu-22.04
 
     strategy:
@@ -86,8 +88,8 @@ jobs:
 
       - name: Checkout repository code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 #only brings last commit
+        # with:
+        #   fetch-depth: 0 #only brings last commit
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -118,11 +120,15 @@ jobs:
       #PNPM
 
       - name: Install dependencies
-        run: pnpm install
+        run: |
+            cd SOLIDITY
+            pnpm install
 
     # unnecessary, test instruction also compiles the contracts
     #   - name: Compile contracts
     #     run: pnpm run compile
 
       - name: Run truffle tests
-        run: pnpm run test
+        run: |
+            cd SOLIDITY
+            pnpm run test
