@@ -21,8 +21,11 @@
  const HDWalletProvider = require('@truffle/hdwallet-provider');
 
  const fs = require('fs'); 
- const pk = fs.readFileSync(".pk").toString().trim();
- const bek = fs.readFileSync(".blockExplorerKey").toString().trim();
+ let pk = '' 
+ try { pk = fs.readFileSync(".pk").toString().trim(); }catch(ex){console.log(ex.toString())}
+ let bek = ''
+ try { bek = fs.readFileSync(".blockExplorerKey").toString().trim(); }catch(ex){console.log(ex.toString())}
+
  
  module.exports = {
    /**
