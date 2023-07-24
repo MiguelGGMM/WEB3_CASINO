@@ -29,7 +29,9 @@
 
 ## CI
 
-We have talked about Vercel built-in CI/CD, however, we are using vercel CLI because we want full control of our CI/CD workflow, .yml files has been added for preview (dev branch) and production (main branch), code checks like prettier and linter are run in parallel with vercel build, once both finish successfully our built project is deployed on vercel
+We have talked about Vercel built-in CI/CD, however, we are using [vercel CLI](https://github.com/vercel/examples/tree/main/ci-cd/github-actions) because we want full control of our CI/CD workflow, .yml files has been added for preview (dev branch) and production (main branch), code checks like prettier and linter are run in parallel with vercel build, once both finish successfully our built project is deployed on vercel
+
+Also a separated file for CI has been added in order to test the contracts, it is a very simple version, if you want see something more elaborated that includes linter and prettifier for typescript tests files and solidity contracts together with codechecks for gas report and coveralls for solidity coverage you can check https://github.com/MiguelGGMM/HARDHAT_TEST_TEMPLATE
 
 ## Previews and videos
 
@@ -55,35 +57,56 @@ The first thing you need to do is clone repo.
 
 Before compile and deploy contracts you have to set some .env addresses following the .env.sample these address can vary depending on the chain you want to deploy, if you want deploy in arbitrum mainnet use the default values
 
-To compile and deploy contracts against arbitrum mainnet
+### To compile and test contracts against the arbitrum mainnet
 
 ```bash
 cd SOLIDITY
-npm install
-npm run compile
-npm run deploy
 ```
 
-If you want to verify the contracts you can use
+Install libraries
 
 ```bash
-npm run verify
+pnpm install
+```
+
+Initialize ganache
+
+```bash
+pnpm run ganacheFork
+```
+
+Run the tests
+
+```bash
+pnpm run test
+```
+
+### Deploy contracts against arbitrum mainnet
+
+```bash
+pnpm run deploy
+```
+
+### If you want to verify the contracts you can use
+
+```bash
+pnpm run verify
 ```
 
 If you want deploy against another chain, you can edit arbitrumOneMainnet in truffle-config.js, setting provider url, chain id and gas settings should do the trick,
 don't forget set your pk on .pk file and your block explorer key on .blockExplorerKey file if you want to verify the contracts.
 
-Only casino treasury and roulette contracts will be verified, if you want to verify the internal roulette managers you have to do it manually using your blockchain explorer, providing the code and the constructor parameters encoded.
+Only casino treasury and roulette contracts will be verified, if you want to verify the internal roulette managers you have to do it manually using your blockchain explorer, providing the code and the constructor parameters encoded (you can use this to encode your parameters https://abi.hashex.org/).
 
 Initialize the contracts bets following the test files and set the contract addresses RPC and chain on the .env.local, contract deployed by me are set by default
 
-Run the client
+### Run the client
 
 ```bash
 cd ..
 cd CASINO_DAPP/casino-dapp
-npm install --legacy-peer-deps
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## Project Structure SOLIDITY
