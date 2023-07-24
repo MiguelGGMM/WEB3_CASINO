@@ -19,65 +19,7 @@ on:
         - '.github/workflows/preview.yml'
         - '.github/workflows/production.yml'
 jobs:
-  ganache:
-    name: Run ganache
-    runs-on: ubuntu-22.04
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-      #   - name: Cancel previous redundant builds
-      #     uses: styfle/cancel-workflow-action@0.9.1
-      #     with:
-      #       access_token: ${{ github.token }}
-
-    #   - name: Checkout repository code
-    #     uses: actions/checkout@v3
-    #     # with:
-    #     #   fetch-depth: 0 #only brings last commit
-
-    #   - name: Use Node.js ${{ matrix.node-version }}
-    #     uses: actions/setup-node@v3
-    #     with:
-    #       node-version: ${{ matrix.node-version }}
-
-      #PNPM
-      - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
-        with:
-          version: 8
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-      #PNPM
-      - uses: actions/checkout@v3
-      - name: Install dependencies
-        run: |
-            cd SOLIDITY 
-            pnpm install
-      - name: Run ganache
-        run: |
-            cd SOLIDITY
-            pnpm run ganacheFork &
-
   truffle-test:
-    needs: [ganache]
     name: truffle-tests
     runs-on: ubuntu-22.04
 
@@ -133,6 +75,11 @@ jobs:
     # unnecessary, test instruction also compiles the contracts
     #   - name: Compile contracts
     #     run: pnpm run compile
+
+      - name: Run ganache
+        run: |
+          cd SOLIDITY
+          pnpm run ganacheFork &
 
       - name: Run truffle tests
         run: |
