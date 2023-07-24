@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'SOLIDITY/**'
 jobs:
   Codechecks:
         runs-on: ubuntu-latest

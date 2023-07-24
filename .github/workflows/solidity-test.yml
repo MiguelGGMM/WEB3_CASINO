@@ -8,8 +8,12 @@ on:
   #   branches: [ dev ]
   push:
     branches: [main]
+    paths-ignore:
+        - 'CASINO_DAPP/**'
   pull_request:
     branches: [main]
+    paths-ignore:
+        - 'CASINO_DAPP/**'
 
 jobs:
   ganache:
