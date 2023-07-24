@@ -9,6 +9,7 @@ on:
     paths-ignore:
       - 'SOLIDITY/**'
       - '.github/workflows/solidity-test.yml'
+      - 'README.md'
 jobs:
   Codechecks:
     runs-on: ubuntu-latest

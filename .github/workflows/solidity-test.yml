@@ -12,12 +12,14 @@ on:
         - 'CASINO_DAPP/**'
         - '.github/workflows/preview.yml'
         - '.github/workflows/production.yml'
+        - 'README.md'
   pull_request:
     branches: [main]
     paths-ignore:
         - 'CASINO_DAPP/**'
         - '.github/workflows/preview.yml'
         - '.github/workflows/production.yml'
+        - 'README.md'
 jobs:
   truffle-test:
     name: truffle-tests
