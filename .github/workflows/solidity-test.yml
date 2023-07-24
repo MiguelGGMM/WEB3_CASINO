@@ -68,7 +68,9 @@ jobs:
       #PNPM
       - uses: actions/checkout@v3
       - name: Install dependencies
-        run: pnpm install
+        run: |
+            cd SOLIDITY 
+            pnpm install
       - name: Run ganache
         run: |
             cd SOLIDITY
