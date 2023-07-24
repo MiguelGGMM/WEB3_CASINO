@@ -10,11 +10,14 @@ on:
     branches: [main]
     paths-ignore:
         - 'CASINO_DAPP/**'
+        - '.github/workflows/preview.yml'
+        - '.github/workflows/production.yml'
   pull_request:
     branches: [main]
     paths-ignore:
         - 'CASINO_DAPP/**'
-
+        - '.github/workflows/preview.yml'
+        - '.github/workflows/production.yml'
 jobs:
   ganache:
     name: Run ganache
@@ -31,15 +34,15 @@ jobs:
       #     with:
       #       access_token: ${{ github.token }}
 
-      - name: Checkout repository code
-        uses: actions/checkout@v3
-        # with:
-        #   fetch-depth: 0 #only brings last commit
+    #   - name: Checkout repository code
+    #     uses: actions/checkout@v3
+    #     # with:
+    #     #   fetch-depth: 0 #only brings last commit
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+    #   - name: Use Node.js ${{ matrix.node-version }}
+    #     uses: actions/setup-node@v3
+    #     with:
+    #       node-version: ${{ matrix.node-version }}
 
       #PNPM
       - uses: pnpm/action-setup@v2
@@ -63,6 +66,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
       #PNPM
+      - uses: actions/checkout@v3
       - name: Install dependencies
         run: pnpm install
       - name: Run ganache
@@ -86,15 +90,15 @@ jobs:
       #     with:
       #       access_token: ${{ github.token }}
 
-      - name: Checkout repository code
-        uses: actions/checkout@v3
-        # with:
-        #   fetch-depth: 0 #only brings last commit
+    #   - name: Checkout repository code
+    #     uses: actions/checkout@v3
+    #     # with:
+    #     #   fetch-depth: 0 #only brings last commit
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+    #   - name: Use Node.js ${{ matrix.node-version }}
+    #     uses: actions/setup-node@v3
+    #     with:
+    #       node-version: ${{ matrix.node-version }}
 
       #PNPM
       - uses: pnpm/action-setup@v2
@@ -118,7 +122,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
       #PNPM
-
+      - uses: actions/checkout@v3
       - name: Install dependencies
         run: |
             cd SOLIDITY
